@@ -2,9 +2,10 @@ import React from "react";
 import { Header } from "../../components/Header";
 import "./JournalPage.css";
 export const JournalPage = () => {
+  let currentPath = window.location.pathname;
   return (
     <div id="journalPageDiv">
-      <Header />
+      <Header currentPath={currentPath} />
       <div id="centerJournalBox">
         <div id="journalOutline">.</div>
         <div id="journalTitle">

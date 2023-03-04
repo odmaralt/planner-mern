@@ -22,13 +22,13 @@ export const LogInPage = () => {
           >
             Sign Up
           </p>
-          <p id="invisibleTitle">Hi</p>
+          <p id="invisibleTitle2">Hi</p>
         </div>
         <p className="credsLogIn">Email</p>
-        <input id="longInput" className="credsLogIn"></input>
+        <input id="longInput2" className="credsLogIn"></input>
         <p className="credsLogIn">Password</p>
-        <input id="longInput" className="credsLogIn"></input>
-        <div>
+        <input id="longInput2" className="credsLogIn"></input>
+        <div id="buttonsLogIn">
           <button>Login</button>
           <button
             onClick={() => {

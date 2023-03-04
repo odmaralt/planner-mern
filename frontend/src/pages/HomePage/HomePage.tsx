@@ -8,9 +8,11 @@ export const HomePage = () => {
   useEffect(() => {
     setInterval(() => setDateState(new Date()), 30000);
   }, []);
+  let currentPath = window.location.pathname;
+
   return (
     <div id="homePageDiv">
-      <Header />
+      <Header currentPath={currentPath} />
       <div id="dateDiv">
         <p>Today</p>
 

@@ -1,5 +1,5 @@
 #journalPageDiv {
-  background-color: #e9dcc9;
+  background: radial-gradient(#e9dcc9, #cec3b4);
   height: 100vh;
 }
 #journalBox {
@@ -8,8 +8,6 @@
   outline: none;
   margin-top: 2%;
   height: 200px;
-  /* background: url("http://cdn.shopify.com/s/files/1/0436/9409/6549/products/7_5x9_25_wide_ruled-line-paper_039210da-166d-4363-a631-d618919c9c07_1200x1200.png?v=1611150564"),
-    #f2f2f2; */
   background-repeat: no-repeat;
   background-size: cover;
   height: 60vh;
@@ -47,4 +45,21 @@
   left: 32vw;
   color: #e9dcc9;
   border: 3px solid rgba(167, 155, 138, 1);
+}
+@media screen and (max-width: 850px) {
+  #journalBox {
+    width: 56%;
+    margin-top: 7.5vh;
+    height: 59vh;
+  }
+  #journalOutline {
+    height: 66.4vh;
+    width: 64vw;
+    top: 15.5vh;
+    left: 15vw;
+  }
+  #journalTitle {
+    left: 16vw;
+    top: 10vh;
+  }
 }

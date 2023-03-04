@@ -3,14 +3,14 @@
   background-size: cover;
   width: 100vw;
   height: 100vh;
+  color: white;
   background-color: #f2f2f2;
 }
 #logo {
   font-family: "Alfa Slab One", cursive;
   font-size: 34px;
-  color: #9a9e8c;
   margin: 0;
-  padding: 20px 80px;
+  padding: 20px 92px;
   cursor: pointer;
 }
 
@@ -22,7 +22,6 @@
 }
 #headerRight {
   display: flex;
-  color: #9a9e8c;
   font-family: "Sora", sans-serif;
   font-weight: 600;
   padding-right: 8%;
@@ -158,4 +157,33 @@
 }
 .pointer {
   cursor: pointer;
+}
+@media screen and (max-width: 850px) {
+  #headerRight {
+    width: 47vw;
+    padding-right: 5%;
+  }
+  #logo {
+    padding-left: 50px;
+  }
+  #plant {
+    right: 5%;
+    bottom: 5%;
+  }
+  #sleepDiv {
+    left: 53.8%;
+    top: 19%;
+  }
+  #waterDiv {
+    right: 22%;
+    top: 48%;
+  }
+  #coolBox {
+    left: 50.5%;
+    top: 17%;
+  }
+  #coolBox2 {
+    right: 25%;
+    top: 46.3%;
+  }
 }
