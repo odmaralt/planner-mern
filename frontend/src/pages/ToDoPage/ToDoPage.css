@@ -56,3 +56,13 @@
     left: 27vw;
   }
 }
+@media screen and (max-width: 600px) {
+  #toDoTitle {
+    font-size: 35px;
+    top: 29vh;
+    left: 17vw;
+  }
+  #toDoBox {
+    width: 65vw;
+  }
+}

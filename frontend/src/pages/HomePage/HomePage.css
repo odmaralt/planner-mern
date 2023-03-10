@@ -55,7 +55,7 @@
   height: 200px;
   font-family: "Alfa Slab One", cursive;
   position: absolute;
-  left: 38%;
+  right: 48%;
   z-index: 1;
   color: #a8ac9a;
   text-shadow: -3px -3px 0px #949787;
@@ -104,7 +104,7 @@
   height: 200px;
   position: absolute;
   color: #f2f2f2;
-  left: 36.5%;
+  right: 49.5%;
   top: 33%;
   z-index: 0;
 }
@@ -171,7 +171,7 @@
     bottom: 5%;
   }
   #sleepDiv {
-    left: 53.8%;
+    right: 22%;
     top: 19%;
   }
   #waterDiv {
@@ -179,11 +179,88 @@
     top: 48%;
   }
   #coolBox {
-    left: 50.5%;
+    right: 25%;
     top: 17%;
   }
   #coolBox2 {
     right: 25%;
     top: 46.3%;
+  }
+}
+@media screen and (max-width: 600px) {
+  #logo {
+    font-size: 18px;
+    padding-left: 20px;
+    padding-right: 30px;
+  }
+  #headerRight {
+    font-size: 13px;
+    padding-right: 20px;
+    width: 60vw;
+  }
+  #sleepDiv {
+    height: 120px;
+    width: 120px;
+    right: 11%;
+    top: 24%;
+  }
+  #waterDiv {
+    height: 120px;
+    width: 120px;
+    right: 11%;
+    top: 48%;
+  }
+  #sleepDiv p {
+    font-size: 38px;
+  }
+  #sleepDiv h1 {
+    font-size: 14px;
+    margin-top: 48px;
+  }
+  #waterDiv h1 {
+    font-size: 14px;
+    margin-top: 48px;
+  }
+  #waterDiv p {
+    font-size: 38px;
+  }
+  #coolBox {
+    right: 13%;
+    top: 21%;
+    height: 120px;
+    width: 120px;
+  }
+  #coolBox2 {
+    right: 13%;
+    height: 120px;
+    width: 120px;
+    top: 45%;
+  }
+  #dateDiv {
+    padding-left: 25px;
+    padding-top: 50px;
+  }
+  #dateDiv p {
+    font-size: 18px;
+  }
+  #dateDiv h1 {
+    font-size: 30px;
+  }
+  #plant {
+    display: none;
+  }
+  #toDoDiv {
+    margin-top: 80px;
+    margin-left: 25px;
+  }
+  #toDoDiv h1 {
+    width: 38%;
+    font-size: 18px;
+  }
+  #toDoDiv p {
+    font-size: 14px;
+  }
+  .checkbox {
+    width: 40%;
   }
 }

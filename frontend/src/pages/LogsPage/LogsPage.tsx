@@ -7,56 +7,51 @@ export const LogsPage = () => {
   return (
     <div id="logsPageDiv">
       <Header currentPath={currentPath} />
-      <div id="logsTitleDiv">
-        <p>Date</p> <p>Sleep</p> <p>Water</p> <p id="journalText">Journal</p>
-      </div>
-      <div id="logsDiv">
-        <div>
-          <p>1/1/2022</p>
-          <p>8hr0min</p>
-          <h2>6 cups</h2>
-          <h1>
-            today i went on a walk, ate, relaxed and i did other stuff and i
-            stuff and i stuff and i stuff and i
-          </h1>
-        </div>{" "}
-        <div>
-          <p>1/1/2022</p>
-          <p>8hr0min</p>
-          <h2>6 cups</h2>
-          <h1>
-            today i went on a walk, ate, relaxed and i did other stuff and i
-            stuff and i stuff and i stuff and i
-          </h1>
-        </div>{" "}
-        <div>
-          <p>1/1/2022</p>
-          <p>8hr0min</p>
-          <h2>6 cups</h2>
-          <h1>
-            today i went on a walk, ate, relaxed and i did other stuff and i
-            stuff and i stuff and i stuff and i
-          </h1>
-        </div>{" "}
-        <div>
-          <p>1/1/2022</p>
-          <p>8hr0min</p>
-          <h2>6 cups</h2>
-          <h1>
-            today i went on a walk, ate, relaxed and i did other stuff and i
-            stuff and i stuff and i stuff and i
-          </h1>
-        </div>{" "}
-        <div>
-          <p>1/1/2022</p>
-          <p>8hr0min</p>
-          <h2>6 cups</h2>
-          <h1>
-            today i went on a walk, ate, relaxed and i did other stuff and i
-            stuff and i stuff and i stuff and i
-          </h1>
-        </div>
-      </div>
+
+      <table id="logsTitleDiv">
+        <tr>
+          <td>Date</td>
+          <td>Sleep</td>
+          <td>Water</td>
+          <td className="journal">Journal</td>
+        </tr>
+        <tr>
+          <td>1/1/2023</td>
+          <td>8hr0min</td>
+          <td>8cups</td>
+          <td className="journal">today i went on a walk, ate, relaxed and</td>
+        </tr>{" "}
+        <tr>
+          <td>1/1/2023</td>
+          <td>8hr0min</td>
+          <td>8cups</td>
+          <td className="journal">today i went on a walk, ate, relaxed and</td>
+        </tr>{" "}
+        <tr>
+          <td>1/1/2023</td>
+          <td>8hr0min</td>
+          <td>8cups</td>
+          <td className="journal">today i went on a walk, ate, relaxed and</td>
+        </tr>{" "}
+        <tr>
+          <td>1/1/2023</td>
+          <td>8hr0min</td>
+          <td>8cups</td>
+          <td className="journal">today i went on a walk, ate, relaxed and</td>
+        </tr>{" "}
+        <tr>
+          <td>1/1/2023</td>
+          <td>8hr0min</td>
+          <td>8cups</td>
+          <td className="journal">today i went on a walk, ate, relaxed and</td>
+        </tr>{" "}
+        <tr>
+          <td>1/1/2023</td>
+          <td>8hr0min</td>
+          <td>8cups</td>
+          <td className="journal">today i went on a walk, ate, relaxed and</td>
+        </tr>
+      </table>
     </div>
   );
 };

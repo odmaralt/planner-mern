@@ -63,3 +63,19 @@
     top: 10vh;
   }
 }
+@media screen and (max-width: 600px) {
+  #journalBox {
+    width: 76%;
+    margin-top: 8.4vh;
+    height: 54vh;
+  }
+  #journalOutline {
+    height: 63vh;
+    width: 88vw;
+    top: 18vh;
+    left: 0.5vw;
+  }
+  #journalTitle {
+    left: 2vw;
+  }
+}
