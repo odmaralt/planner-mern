@@ -33,11 +33,17 @@ export const HomePage = () => {
       </div>
       <div id="sleepDiv">
         <p>SLEEP</p>
-        <h1>0 Hr 0 min</h1>
+        <h1 className="homeInput">
+          <input placeholder="0" /> Hr <input placeholder="0" />
+          min
+        </h1>
       </div>
       <div id="coolBox">.</div>
       <div id="waterDiv">
-        <p>WATER</p> <h1>0 cups out of 8</h1>
+        <p>WATER</p>{" "}
+        <h1 className="homeInput">
+          <input placeholder="0" />  out of <input placeholder="8" />{" "}
+        </h1>
       </div>{" "}
       <div id="coolBox2">.</div>
       <div id="toDoDiv">

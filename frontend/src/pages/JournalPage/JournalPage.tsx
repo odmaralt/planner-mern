@@ -13,6 +13,9 @@ export const JournalPage = () => {
         </div>
         <textarea id="journalBox"></textarea>
       </div>
+      <div id="saveJournalButton">
+        <button>Save</button>
+      </div>
     </div>
   );
 };

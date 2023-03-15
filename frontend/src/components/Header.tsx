@@ -43,7 +43,7 @@ export const Header = (props: any) => {
           handleLogoClick();
         }}
       >
-        DailyPlanner
+        Plannify
       </p>
       <div id="headerRight">
         <p

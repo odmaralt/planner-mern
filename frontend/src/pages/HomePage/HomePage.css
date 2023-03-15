@@ -8,12 +8,11 @@
 }
 #logo {
   font-family: "Alfa Slab One", cursive;
-  font-size: 34px;
+  font-size: 40px;
   margin: 0;
   padding: 20px 92px;
   cursor: pointer;
 }
-
 #headerDiv {
   display: flex;
   justify-content: space-between;
@@ -58,18 +57,19 @@
   right: 48%;
   z-index: 1;
   color: #a8ac9a;
-  text-shadow: -3px -3px 0px #949787;
   top: 36%;
 }
 #sleepDiv p {
   position: absolute;
   bottom: 44%;
   left: -8%;
+  text-shadow: -3px -3px 0px #949787;
+
   font-size: 56px;
 }
 #sleepDiv h1 {
   display: flex;
-  font-size: 22px;
+  font-size: 18px;
   margin-top: 80px;
   justify-content: center;
 }
@@ -78,8 +78,6 @@
   width: 200px;
   height: 200px;
   color: #a8ac9a;
-  text-shadow: -3px -3px 0px #949787;
-
   font-family: "Alfa Slab One", cursive;
   position: absolute;
   right: 25%;
@@ -90,11 +88,12 @@
   position: absolute;
   bottom: 44%;
   left: -12%;
+  text-shadow: -3px -3px 0px #949787;
   font-size: 54px;
 }
 #waterDiv h1 {
   display: flex;
-  font-size: 22px;
+  font-size: 18px;
   margin-top: 80px;
   justify-content: center;
 }
@@ -158,7 +157,62 @@
 .pointer {
   cursor: pointer;
 }
+#addTaskInput {
+  border: 0.5px solid rgb(122, 113, 101, 0.7);
+  border-radius: 4px;
+  padding: 12px 5px;
+  width: 300px;
+  font-size: 16px;
+  font-family: "Sora";
+  color: rgb(122, 113, 101);
+  margin: 15px 0px;
+}
+#addTaskText {
+  font-size: 18px;
+  color: rgb(122, 113, 101);
+  margin: 10px 0px;
+  font-family: "Sora";
+  font-weight: 500;
+}
+#addTaskButton button {
+  background-color: rgb(122, 113, 101);
+  outline: none;
+  border: none;
+  margin-right: 6px;
+  margin-top: 10px;
+  color: rgb(194, 180, 159);
+  font-family: "Sora", sans-serif;
+  font-weight: 500;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+.homeInput {
+  display: flex;
+  align-items: center;
+}
+.homeInput input {
+  width: 30px;
+  text-align: right;
+  font-size: 22px;
+  margin-right: 5px;
+  color: #a8ac9a;
+  border: 0;
+  outline: none;
+  background-color: transparent;
+  font-family: "Alfa Slab One", cursive;
+}
+::placeholder {
+  color: #a8ac9a;
+  opacity: 1;
+}
+#taskModalDiv {
+  width: 22vw;
+}
 @media screen and (max-width: 850px) {
+  #taskModalDiv {
+    width: 40vw;
+  }
   #headerRight {
     width: 47vw;
     padding-right: 5%;
@@ -167,8 +221,8 @@
     padding-left: 50px;
   }
   #plant {
-    right: 5%;
-    bottom: 5%;
+    right: 2%;
+    bottom: 2%;
   }
   #sleepDiv {
     right: 22%;
@@ -188,6 +242,9 @@
   }
 }
 @media screen and (max-width: 600px) {
+  #taskModalDiv {
+    width: 82vw;
+  }
   #logo {
     font-size: 18px;
     padding-left: 20px;

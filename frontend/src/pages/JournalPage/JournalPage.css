@@ -10,9 +10,10 @@
   height: 200px;
   background-repeat: no-repeat;
   background-size: cover;
-  height: 60vh;
+  height: 55vh;
   padding: 40px 30px;
   line-height: 28px;
+  border-radius: 2px;
   z-index: 1;
   color: rgb(85, 80, 71);
   resize: none;
@@ -38,13 +39,34 @@
 }
 #journalOutline {
   position: absolute;
-  height: 71vh;
+  height: 68vh;
   z-index: 0;
   width: 32.3vw;
   top: 16vh;
   left: 32vw;
   color: #e9dcc9;
+  border-radius: 2px;
+
   border: 3px solid rgba(167, 155, 138, 1);
+}
+#saveJournalButton {
+  display: flex;
+  justify-content: center;
+}
+#saveJournalButton button {
+  background-color: rgb(122, 113, 101);
+  outline: none;
+  border: none;
+  margin-top: 10px;
+  color: rgb(194, 180, 159);
+  font-family: "Sora", sans-serif;
+  font-weight: 500;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+#saveJournalButton :hover {
+  background-color: rgb(95, 88, 79);
 }
 @media screen and (max-width: 850px) {
   #journalBox {

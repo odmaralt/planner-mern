@@ -7,12 +7,14 @@
 }
 #toDoBox {
   position: absolute;
-  width: 33vw;
+  width: 32vw;
   top: 50%;
   color: rgb(150, 139, 123);
   font-weight: 500;
   left: 50%;
   margin-top: 30px;
+  height: 50vh;
+  overflow: scroll;
   transform: translate(-50%, -50%);
 }
 #toDoBox div {
@@ -25,7 +27,6 @@
 #toDoTitle {
   position: absolute;
   top: 20vh;
-  z-index: 2;
   left: 33vw;
   letter-spacing: -0.8px;
   font-family: "Alfa Slab One", cursive;
@@ -44,16 +45,38 @@
   height: 30px;
   background: transparent;
 }
+#addToDo {
+  font-family: "Alice";
+  font-size: 90px;
+  text-shadow: -2px -2px 2px rgb(172, 159, 140);
+  color: rgba(201, 185, 163, 1);
+  font-weight: bolder;
+  cursor: pointer;
+  margin: 0;
+}
+#addToDoDiv {
+  position: absolute;
+  bottom: 10vh;
+  left: 0;
+  right: 0;
+  margin-left: auto;
+  margin-right: auto;
+  width: 50px;
+}
 @media screen and (max-width: 850px) {
   #toDoBox {
     width: 45vw;
+    height: 36vh;
   }
   #toDoBox div {
     height: 8vh;
   }
   #toDoTitle {
-    top: 27vh;
+    top: 29vh;
     left: 27vw;
+  }
+  #addToDoDiv {
+    bottom: 22vh;
   }
 }
 @media screen and (max-width: 600px) {
