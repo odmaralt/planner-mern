@@ -1,26 +1,37 @@
 import React, { useState } from "react";
+import uuidRandom from "uuid-random";
+
+interface Task {
+  task: string;
+  id: string;
+}
 type CreateToDoModalProps = {
   closeModal: () => void;
+  tasks: any[];
+  setTasks: React.Dispatch<React.SetStateAction<Task[]>>;
 };
 const initialValues = {
   task: "",
+  id: "",
 };
 export const CreateToDoModal = (props: CreateToDoModalProps) => {
-  const [formValues, setFormValues] = useState<any>(initialValues); // formvalues takes initial values
+  const [formValues, setFormValues] = useState<any>(initialValues);
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
-    setFormValues({ ...formValues, [name]: value });
+    setFormValues({ ...formValues, [name]: value, id: uuidRandom() });
+    //sets form values
   };
   const handleAddButton = async (
     e: React.MouseEvent<HTMLButtonElement, MouseEvent>
   ) => {
     e.preventDefault();
-    const values = {
-      ...formValues,
-    };
+    if (formValues.task.length > 0) {
+    props.setTasks([...props.tasks, formValues]);
+    //sets tasks as form values and everything inside tasks array
+    }
+
     props.closeModal();
-    console.log(formValues);
   };
 
   return (

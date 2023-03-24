@@ -3,13 +3,26 @@ import Plant from "../../components/Plant";
 import { Checkbox } from "@mui/material";
 import { Header } from "../../components/Header";
 import React, { useEffect, useState } from "react";
+const initialValues = {
+  hoursSlept: "",
+  minutesSlept: "",
+  cupsDrank: "",
+  cupsTotal: "8",
+};
 export const HomePage = () => {
+  const [formValues, setFormValues] = useState<any>(initialValues);
+
   const [dateState, setDateState] = useState(new Date());
   useEffect(() => {
     setInterval(() => setDateState(new Date()), 30000);
   }, []);
   let currentPath = window.location.pathname;
-
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = e.target;
+    setFormValues({ ...formValues, [name]: value });
+    //sets form values
+  };
+  // console.log(formValues);
   return (
     <div id="homePageDiv">
       <Header currentPath={currentPath} />
@@ -34,16 +47,38 @@ export const HomePage = () => {
       <div id="sleepDiv">
         <p>SLEEP</p>
         <h1 className="homeInput">
-          <input placeholder="0" /> Hr <input placeholder="0" />
+          <input
+            onChange={handleInputChange}
+            name="hoursSlept"
+            placeholder="0"
+          />{" "}
+          Hr{" "}
+          <input
+            onChange={handleInputChange}
+            name="minutesSlept"
+            placeholder="0"
+          />
           min
         </h1>
+        <h3>save</h3>
       </div>
       <div id="coolBox">.</div>
       <div id="waterDiv">
         <p>WATER</p>{" "}
         <h1 className="homeInput">
-          <input placeholder="0" />  out of <input placeholder="8" />{" "}
-        </h1>
+          <input
+            onChange={handleInputChange}
+            name="cupsDrank"
+            placeholder="0"
+          />{" "}
+          out of{" "}
+          <input
+            onChange={handleInputChange}
+            name="cupsTotal"
+            placeholder="8"
+          />{" "}
+        </h1>{" "}
+        <h3>save</h3>
       </div>{" "}
       <div id="coolBox2">.</div>
       <div id="toDoDiv">

@@ -73,6 +73,23 @@
   margin-top: 80px;
   justify-content: center;
 }
+#sleepDiv h3 {
+  position: absolute;
+  bottom: -10%;
+  right: 5%;
+  cursor: pointer;
+  padding: 3px;
+  font-size: 25px;
+}
+#waterDiv h3 {
+  position: absolute;
+  bottom: -10%;
+  right: 5%;
+  cursor: pointer;
+
+  padding: 3px;
+  font-size: 25px;
+}
 #waterDiv {
   background-color: #d6dcc3;
   width: 200px;
@@ -128,7 +145,6 @@
   font-weight: 400;
   margin: 0;
   font-size: 18px;
-
   padding: 14px 0px;
 }
 #toDoDiv h1 {
@@ -138,7 +154,7 @@
   padding-left: 10px;
   font-weight: 500;
   border-bottom: 0.1px solid #a3a4c8;
-  width: 18%;
+  width: 17.3%;
 }
 .checkbox {
   width: 18%;
@@ -242,6 +258,12 @@
   }
 }
 @media screen and (max-width: 600px) {
+  #sleepDiv h3 {
+    font-size: 18px;
+  }
+  #waterDiv h3 {
+    font-size: 18px;
+  }
   #taskModalDiv {
     width: 82vw;
   }
@@ -271,11 +293,11 @@
     font-size: 38px;
   }
   #sleepDiv h1 {
-    font-size: 14px;
+    font-size: 11px;
     margin-top: 48px;
   }
   #waterDiv h1 {
-    font-size: 14px;
+    font-size: 11px;
     margin-top: 48px;
   }
   #waterDiv p {

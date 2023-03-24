@@ -82,9 +82,14 @@
   border-radius: 6px;
   padding: 10px;
 }
+.errorsShort {
+  color: red;
+  margin: -5px 0px 0px;
+  font-size: 10px;
+}
 @media screen and (max-width: 850px) {
   #signUpBox {
-    width: 39vw;
+    width: 40vw;
   }
   #longInput {
     width: 32vw;

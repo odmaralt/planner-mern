@@ -8,7 +8,7 @@
 #toDoBox {
   position: absolute;
   width: 32vw;
-  top: 50%;
+  top: 50vh;
   color: rgb(150, 139, 123);
   font-weight: 500;
   left: 50%;
@@ -21,8 +21,9 @@
   height: 10vh;
   vertical-align: middle;
   display: flex;
+  justify-content: space-between;
   align-items: center;
-  border-top: 2px solid rgba(201, 185, 163, 0.56);
+  border-bottom: 2px solid rgba(201, 185, 163, 0.56);
 }
 #toDoTitle {
   position: absolute;
@@ -62,6 +63,8 @@
   margin-left: auto;
   margin-right: auto;
   width: 50px;
+}.trashIcon{
+  padding-right: 16px;
 }
 @media screen and (max-width: 850px) {
   #toDoBox {

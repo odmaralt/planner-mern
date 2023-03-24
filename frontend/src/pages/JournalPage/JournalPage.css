@@ -10,8 +10,8 @@
   height: 200px;
   background-repeat: no-repeat;
   background-size: cover;
-  height: 55vh;
-  padding: 40px 30px;
+  height: 50vh;
+  padding: 60px 30px;
   line-height: 28px;
   border-radius: 2px;
   z-index: 1;
@@ -53,11 +53,28 @@
   display: flex;
   justify-content: center;
 }
+#promptButton {
+  position: absolute;
+  background-color: rgb(145, 134, 120);
+  outline: none;
+  border: none;
+  right: 35vw;
+  top: 22vh;
+  margin-top: 10px;
+  color: rgb(207, 193, 171);
+  font-family: "Sora", sans-serif;
+  font-weight: 500;
+  font-size: 12px;
+  padding: 10px 10px;
+  z-index: 10;
+  border-radius: 5px;
+  cursor: pointer;
+}
 #saveJournalButton button {
   background-color: rgb(122, 113, 101);
   outline: none;
   border: none;
-  margin-top: 10px;
+  margin-top: 18px;
   color: rgb(194, 180, 159);
   font-family: "Sora", sans-serif;
   font-weight: 500;
@@ -72,7 +89,7 @@
   #journalBox {
     width: 56%;
     margin-top: 7.5vh;
-    height: 59vh;
+    height: 54vh;
   }
   #journalOutline {
     height: 66.4vh;
@@ -84,12 +101,17 @@
     left: 16vw;
     top: 10vh;
   }
+  #promptButton {
+    right: 21vw;
+    top: 20vh;
+  }
 }
 @media screen and (max-width: 600px) {
   #journalBox {
     width: 76%;
     margin-top: 8.4vh;
-    height: 54vh;
+    height: 50vh;
+    padding-top: 80px;
   }
   #journalOutline {
     height: 63vh;
@@ -99,5 +121,19 @@
   }
   #journalTitle {
     left: 2vw;
+  }
+  #promptButton {
+    right: 10vw;
+    top: 22vh;
+  }
+}
+@media screen and (max-width: 400px) {
+  #journalBox {
+    height: 40vh;
+    padding-top: 80px;
+  }
+  #promptButton {
+    right: 10vw;
+    top: 26vh;
   }
 }

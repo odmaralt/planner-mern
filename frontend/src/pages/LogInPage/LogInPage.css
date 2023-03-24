@@ -62,6 +62,11 @@
   height: 35px;
   outline: none;
 }
+.errors {
+  color: red;
+  margin: -5px 0px 0px 18px;
+  font-size: 11px;
+}
 @media screen and (max-width: 850px) {
   #logInBox {
     width: 37vw;
