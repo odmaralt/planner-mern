@@ -1,10 +1,9 @@
-/* eslint-disable react-hooks/rules-of-hooks */
+import axios from "axios";
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import * as yup from "yup";
-import axios from "axios";
-
 import "./LogInPage.css";
+
 const initialValues = {
   email: "",
   password: "",
@@ -18,6 +17,7 @@ export const LogInPage = () => {
   const [formErrors, setFormErrors] = useState(initialValues);
   const [formValues, setFormValues] = useState(initialValues);
   const [errorMessage, setErrorMessage] = useState("");
+  console.log("Error" + errorMessage);
 
   const navigate = useNavigate();
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -53,14 +53,14 @@ export const LogInPage = () => {
             },
           }
         )
-        .then((response) => {
+        .then((response: any) => {
           const {
             data: { token },
           } = response.data;
           console.log(response.data.data.user);
           navigate("/home");
         })
-        .catch((err) => {
+        .catch((err: any) => {
           console.log(err);
           setErrorMessage("Email or password is incorrect!");
         });
@@ -95,7 +95,7 @@ export const LogInPage = () => {
         <p className="errors">{formErrors.email}</p>{" "}
         <p className="credsLogIn">Password</p>
         <input
-        type={"password"}
+          type={"password"}
           id="longInput2"
           className="credsLogIn"
           name="password"

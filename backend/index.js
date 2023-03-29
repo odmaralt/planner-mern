@@ -1,15 +1,15 @@
 const express = require("express");
+const connect = require("./db/db");
+const userRoutes = require("./router/users");
 const app = express();
 const port = 9000;
-const users = require("./router/users");
-const signUp = require("./router/signUp");
-const connect = require("./db/db");
 
+app.use(express.json());
 
+app.use("/api", userRoutes);
 
-app.use("/users", users);
-app.use(signUp);
 connect();
+
 app.get("/", (req, res) => {
   res.send("Hello World!");
 });
