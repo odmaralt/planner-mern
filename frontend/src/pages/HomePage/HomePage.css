@@ -3,17 +3,16 @@
   background-size: cover;
   width: 100vw;
   height: 100vh;
+  color: white;
   background-color: #f2f2f2;
 }
 #logo {
   font-family: "Alfa Slab One", cursive;
-  font-size: 34px;
-  color: #9a9e8c;
+  font-size: 40px;
   margin: 0;
-  padding: 20px 80px;
+  padding: 20px 92px;
   cursor: pointer;
 }
-
 #headerDiv {
   display: flex;
   justify-content: space-between;
@@ -22,7 +21,6 @@
 }
 #headerRight {
   display: flex;
-  color: #9a9e8c;
   font-family: "Sora", sans-serif;
   font-weight: 600;
   padding-right: 8%;
@@ -56,31 +54,47 @@
   height: 200px;
   font-family: "Alfa Slab One", cursive;
   position: absolute;
-  left: 38%;
+  right: 48%;
   z-index: 1;
   color: #a8ac9a;
-  text-shadow: -3px -3px 0px #949787;
   top: 36%;
 }
 #sleepDiv p {
   position: absolute;
   bottom: 44%;
   left: -8%;
+  text-shadow: -3px -3px 0px #949787;
+
   font-size: 56px;
 }
 #sleepDiv h1 {
   display: flex;
-  font-size: 22px;
+  font-size: 18px;
   margin-top: 80px;
   justify-content: center;
+}
+#sleepDiv h3 {
+  position: absolute;
+  bottom: -10%;
+  right: 5%;
+  cursor: pointer;
+  padding: 3px;
+  font-size: 25px;
+}
+#waterDiv h3 {
+  position: absolute;
+  bottom: -10%;
+  right: 5%;
+  cursor: pointer;
+
+  padding: 3px;
+  font-size: 25px;
 }
 #waterDiv {
   background-color: #d6dcc3;
   width: 200px;
   height: 200px;
   color: #a8ac9a;
-  text-shadow: -3px -3px 0px #949787;
-
   font-family: "Alfa Slab One", cursive;
   position: absolute;
   right: 25%;
@@ -91,11 +105,12 @@
   position: absolute;
   bottom: 44%;
   left: -12%;
+  text-shadow: -3px -3px 0px #949787;
   font-size: 54px;
 }
 #waterDiv h1 {
   display: flex;
-  font-size: 22px;
+  font-size: 18px;
   margin-top: 80px;
   justify-content: center;
 }
@@ -105,7 +120,7 @@
   height: 200px;
   position: absolute;
   color: #f2f2f2;
-  left: 36.5%;
+  right: 49.5%;
   top: 33%;
   z-index: 0;
 }
@@ -130,7 +145,6 @@
   font-weight: 400;
   margin: 0;
   font-size: 18px;
-
   padding: 14px 0px;
 }
 #toDoDiv h1 {
@@ -140,7 +154,7 @@
   padding-left: 10px;
   font-weight: 500;
   border-bottom: 0.1px solid #a3a4c8;
-  width: 18%;
+  width: 17.3%;
 }
 .checkbox {
   width: 18%;
@@ -158,4 +172,174 @@
 }
 .pointer {
   cursor: pointer;
+}
+#addTaskInput {
+  border: 0.5px solid rgb(122, 113, 101, 0.7);
+  border-radius: 4px;
+  padding: 12px 5px;
+  width: 300px;
+  font-size: 16px;
+  font-family: "Sora";
+  color: rgb(122, 113, 101);
+  margin: 15px 0px;
+}
+#addTaskText {
+  font-size: 18px;
+  color: rgb(122, 113, 101);
+  margin: 10px 0px;
+  font-family: "Sora";
+  font-weight: 500;
+}
+#addTaskButton button {
+  background-color: rgb(122, 113, 101);
+  outline: none;
+  border: none;
+  margin-right: 6px;
+  margin-top: 10px;
+  color: rgb(194, 180, 159);
+  font-family: "Sora", sans-serif;
+  font-weight: 500;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+.homeInput {
+  display: flex;
+  align-items: center;
+}
+.homeInput input {
+  width: 30px;
+  text-align: right;
+  font-size: 22px;
+  margin-right: 5px;
+  color: #a8ac9a;
+  border: 0;
+  outline: none;
+  background-color: transparent;
+  font-family: "Alfa Slab One", cursive;
+}
+::placeholder {
+  color: #a8ac9a;
+  opacity: 1;
+}
+#taskModalDiv {
+  width: 22vw;
+}
+@media screen and (max-width: 850px) {
+  #taskModalDiv {
+    width: 40vw;
+  }
+  #headerRight {
+    width: 47vw;
+    padding-right: 5%;
+  }
+  #logo {
+    padding-left: 50px;
+  }
+  #plant {
+    right: 2%;
+    bottom: 2%;
+  }
+  #sleepDiv {
+    right: 22%;
+    top: 19%;
+  }
+  #waterDiv {
+    right: 22%;
+    top: 48%;
+  }
+  #coolBox {
+    right: 25%;
+    top: 17%;
+  }
+  #coolBox2 {
+    right: 25%;
+    top: 46.3%;
+  }
+}
+@media screen and (max-width: 600px) {
+  #sleepDiv h3 {
+    font-size: 18px;
+  }
+  #waterDiv h3 {
+    font-size: 18px;
+  }
+  #taskModalDiv {
+    width: 82vw;
+  }
+  #logo {
+    font-size: 18px;
+    padding-left: 20px;
+    padding-right: 30px;
+  }
+  #headerRight {
+    font-size: 13px;
+    padding-right: 20px;
+    width: 60vw;
+  }
+  #sleepDiv {
+    height: 120px;
+    width: 120px;
+    right: 11%;
+    top: 24%;
+  }
+  #waterDiv {
+    height: 120px;
+    width: 120px;
+    right: 11%;
+    top: 48%;
+  }
+  #sleepDiv p {
+    font-size: 38px;
+  }
+  #sleepDiv h1 {
+    font-size: 11px;
+    margin-top: 48px;
+  }
+  #waterDiv h1 {
+    font-size: 11px;
+    margin-top: 48px;
+  }
+  #waterDiv p {
+    font-size: 38px;
+  }
+  #coolBox {
+    right: 13%;
+    top: 21%;
+    height: 120px;
+    width: 120px;
+  }
+  #coolBox2 {
+    right: 13%;
+    height: 120px;
+    width: 120px;
+    top: 45%;
+  }
+  #dateDiv {
+    padding-left: 25px;
+    padding-top: 50px;
+  }
+  #dateDiv p {
+    font-size: 18px;
+  }
+  #dateDiv h1 {
+    font-size: 30px;
+  }
+  #plant {
+    display: none;
+  }
+  #toDoDiv {
+    margin-top: 80px;
+    margin-left: 25px;
+  }
+  #toDoDiv h1 {
+    width: 38%;
+    font-size: 18px;
+  }
+  #toDoDiv p {
+    font-size: 14px;
+  }
+  .checkbox {
+    width: 40%;
+  }
 }

@@ -1,5 +1,5 @@
 #journalPageDiv {
-  background-color: #e9dcc9;
+  background: radial-gradient(#e9dcc9, #cec3b4);
   height: 100vh;
 }
 #journalBox {
@@ -8,13 +8,12 @@
   outline: none;
   margin-top: 2%;
   height: 200px;
-  /* background: url("http://cdn.shopify.com/s/files/1/0436/9409/6549/products/7_5x9_25_wide_ruled-line-paper_039210da-166d-4363-a631-d618919c9c07_1200x1200.png?v=1611150564"),
-    #f2f2f2; */
   background-repeat: no-repeat;
   background-size: cover;
-  height: 60vh;
-  padding: 40px 30px;
+  height: 50vh;
+  padding: 60px 30px;
   line-height: 28px;
+  border-radius: 2px;
   z-index: 1;
   color: rgb(85, 80, 71);
   resize: none;
@@ -40,11 +39,101 @@
 }
 #journalOutline {
   position: absolute;
-  height: 71vh;
+  height: 68vh;
   z-index: 0;
   width: 32.3vw;
   top: 16vh;
   left: 32vw;
   color: #e9dcc9;
+  border-radius: 2px;
+
   border: 3px solid rgba(167, 155, 138, 1);
+}
+#saveJournalButton {
+  display: flex;
+  justify-content: center;
+}
+#promptButton {
+  position: absolute;
+  background-color: rgb(145, 134, 120);
+  outline: none;
+  border: none;
+  right: 35vw;
+  top: 22vh;
+  margin-top: 10px;
+  color: rgb(207, 193, 171);
+  font-family: "Sora", sans-serif;
+  font-weight: 500;
+  font-size: 12px;
+  padding: 10px 10px;
+  z-index: 10;
+  border-radius: 5px;
+  cursor: pointer;
+}
+#saveJournalButton button {
+  background-color: rgb(122, 113, 101);
+  outline: none;
+  border: none;
+  margin-top: 18px;
+  color: rgb(194, 180, 159);
+  font-family: "Sora", sans-serif;
+  font-weight: 500;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+#saveJournalButton :hover {
+  background-color: rgb(95, 88, 79);
+}
+@media screen and (max-width: 850px) {
+  #journalBox {
+    width: 56%;
+    margin-top: 7.5vh;
+    height: 54vh;
+  }
+  #journalOutline {
+    height: 66.4vh;
+    width: 64vw;
+    top: 15.5vh;
+    left: 15vw;
+  }
+  #journalTitle {
+    left: 16vw;
+    top: 10vh;
+  }
+  #promptButton {
+    right: 21vw;
+    top: 20vh;
+  }
+}
+@media screen and (max-width: 600px) {
+  #journalBox {
+    width: 76%;
+    margin-top: 8.4vh;
+    height: 50vh;
+    padding-top: 80px;
+  }
+  #journalOutline {
+    height: 63vh;
+    width: 88vw;
+    top: 18vh;
+    left: 0.5vw;
+  }
+  #journalTitle {
+    left: 2vw;
+  }
+  #promptButton {
+    right: 10vw;
+    top: 22vh;
+  }
+}
+@media screen and (max-width: 400px) {
+  #journalBox {
+    height: 40vh;
+    padding-top: 80px;
+  }
+  #promptButton {
+    right: 10vw;
+    top: 26vh;
+  }
 }

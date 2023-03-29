@@ -1,0 +1,94 @@
+#toDoPageDiv {
+  background-image: url("../../assets/dotGrid.png");
+  background-size: cover;
+  width: 100vw;
+  height: 100vh;
+  background-color: #f2f2f2;
+}
+#toDoBox {
+  position: absolute;
+  width: 32vw;
+  top: 50vh;
+  color: rgb(150, 139, 123);
+  font-weight: 500;
+  left: 50%;
+  margin-top: 30px;
+  height: 50vh;
+  overflow: scroll;
+  transform: translate(-50%, -50%);
+}
+#toDoBox div {
+  height: 10vh;
+  vertical-align: middle;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 2px solid rgba(201, 185, 163, 0.56);
+}
+#toDoTitle {
+  position: absolute;
+  top: 20vh;
+  left: 33vw;
+  letter-spacing: -0.8px;
+  font-family: "Alfa Slab One", cursive;
+  font-size: 50px;
+  text-transform: uppercase;
+  text-shadow: -3px -3px 0px rgb(172, 159, 140);
+  color: rgba(201, 185, 163, 1);
+}
+#toDoBox textarea {
+  resize: none;
+  border: none;
+  background-color: none;
+  color: none;
+  padding-top: 2%;
+  outline: none;
+  height: 30px;
+  background: transparent;
+}
+#addToDo {
+  font-family: "Alice";
+  font-size: 90px;
+  text-shadow: -2px -2px 2px rgb(172, 159, 140);
+  color: rgba(201, 185, 163, 1);
+  font-weight: bolder;
+  cursor: pointer;
+  margin: 0;
+}
+#addToDoDiv {
+  position: absolute;
+  bottom: 10vh;
+  left: 0;
+  right: 0;
+  margin-left: auto;
+  margin-right: auto;
+  width: 50px;
+}.trashIcon{
+  padding-right: 16px;
+}
+@media screen and (max-width: 850px) {
+  #toDoBox {
+    width: 45vw;
+    height: 36vh;
+  }
+  #toDoBox div {
+    height: 8vh;
+  }
+  #toDoTitle {
+    top: 29vh;
+    left: 27vw;
+  }
+  #addToDoDiv {
+    bottom: 22vh;
+  }
+}
+@media screen and (max-width: 600px) {
+  #toDoTitle {
+    font-size: 35px;
+    top: 29vh;
+    left: 17vw;
+  }
+  #toDoBox {
+    width: 65vw;
+  }
+}

@@ -1,0 +1,33 @@
+#logsPageDiv {
+  background: radial-gradient(rgb(186, 190, 170), #97998d);
+  color: #fff5e6;
+  height: 100vh;
+  font-family: "Sora", sans-serif;
+}
+#logsTitleDiv {
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 10vh;
+}
+td {
+  width: 14vw;
+  height: 50px;
+  font-size: 16px;
+  border-bottom: 0.5px solid #fff7ea93;
+}
+.journal {
+  width: 30vw;
+}
+#logsDiv {
+  overflow: scroll;
+  height: 45vh;
+}
+@media screen and (max-width: 600px) {
+  td {
+    width: 16vw;
+    font-size: 13px;
+  }
+  .journal {
+    width: 40vw;
+  }
+}
