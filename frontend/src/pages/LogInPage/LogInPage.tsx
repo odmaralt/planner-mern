@@ -17,7 +17,6 @@ export const LogInPage = () => {
   const [formErrors, setFormErrors] = useState(initialValues);
   const [formValues, setFormValues] = useState(initialValues);
   const [errorMessage, setErrorMessage] = useState("");
-  console.log("Error" + errorMessage);
 
   const navigate = useNavigate();
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -36,13 +35,14 @@ export const LogInPage = () => {
         });
       });
   };
+
   const handleSubmitButton = async () => {
     if (formValues.email === "" || formValues.password === "") {
       console.log("here");
     } else {
       await axios
         .post(
-          "http://localhost:3000/",
+          "http://localhost:9000/login",
           {
             email: formValues.email,
             password: formValues.password,
@@ -53,14 +53,11 @@ export const LogInPage = () => {
             },
           }
         )
-        .then((response: any) => {
-          const {
-            data: { token },
-          } = response.data;
+        .then((response) => {
           console.log(response.data.data.user);
           navigate("/home");
         })
-        .catch((err: any) => {
+        .catch((err) => {
           console.log(err);
           setErrorMessage("Email or password is incorrect!");
         });
@@ -102,6 +99,7 @@ export const LogInPage = () => {
           onChange={handleInputChange}
         ></input>{" "}
         <p className="errors">{formErrors.password}</p>{" "}
+        {errorMessage.length > 0 && <p className="errors"> {errorMessage} </p>}
         <div id="buttonsLogIn">
           <button onClick={handleSubmitButton}>Login</button>
           <button
