@@ -1,8 +1,9 @@
-import { Checkbox } from "@mui/material";
+import { Alert, Checkbox, FormControlLabel, Stack } from "@mui/material";
 import axios from "axios";
+import { brown } from "@mui/material/colors";
+
 import React, { useEffect, useState } from "react";
 import Modal from "react-modal";
-import { tokenToString } from "typescript";
 import { CreateToDoModal } from "../../components/CreateToDoModal";
 import { Header } from "../../components/Header";
 import TrashIcon from "../../components/TrashIcon";
@@ -21,6 +22,7 @@ const customStyles = {
 interface Task {
   task: string;
   _id: string;
+  checked: boolean;
 }
 const fetchTasks = async () => {
   return await axios.get(`http://localhost:9000/tasks`, {
@@ -33,30 +35,37 @@ export const ToDoPage = () => {
   let currentPath = window.location.pathname;
   const [modalIsOpen, setIsOpen] = React.useState<any>(false);
   const [data, setData] = useState<Task[]>([]);
-  const [tasks, setTasks] = React.useState<Task[]>([
-    { _id: "950743fdsaf940", task: "Task 1" },
-    { _id: "14fd4324f3940", task: "Task 2" },
-    { _id: "3647fd4324f39klk40", task: "Task 3" },
-  ]);
+  const [success, setSuccess] = useState<boolean>(false);
+  const [tasks, setTasks] = React.useState<Task[]>([]);
+  const handleClick = (id: string) => {
+    const newTasks = tasks.map((task) => {
+      if (task._id === id) {
+        return { ...task, completed: !task.checked };
+      } else {
+        return task;
+      }
+    });
+    setTasks(newTasks);
+  };
   const openModal = () => {
     setIsOpen(true);
   };
   const deleteTask = async (_id: string) => {
-    // setTasks(
-    //   //filters tasks array so that if the id isnt equal to the id chosen, keep it in array
-    //   tasks.filter((task: { _id: string; task: string }) => task._id !== id)
-    // );
     await axios
       .delete(`http://localhost:9000/tasks/${_id}`, {
         headers: {
           "Content-Type": "application/json",
-          // Authorization: `Bearer{ ${}}`,
+          Authorization: `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Im9kZHk5NzZAZ21haWwuY29tIiwidXNlcklkIjoiNjQyNGM4ZmU1ZGE0YTU2YjNmZmFkYjlkIiwiaWF0IjoxNjgwMjMyNTg3LCJleHAiOjE2ODAzMTg5ODd9.NknlP8Swrw7dqmh5ABwdNs-WLyGK2XAUjFk7FkCqkJc`,
         },
       })
       .then((response) => {
+        setSuccess(true);
+
         setTimeout(() => {
+          setSuccess(false);
+
           window.location.reload();
-        }, 0);
+        }, 1000);
       })
       .catch((err) => console.log(err));
   };
@@ -72,6 +81,7 @@ export const ToDoPage = () => {
         console.log(err);
       });
   }, []);
+
   return (
     <div id="toDoPageDiv">
       <Header currentPath={currentPath} />
@@ -81,13 +91,34 @@ export const ToDoPage = () => {
           return (
             <div>
               <div>
-                <Checkbox
-                  sx={{
-                    color: "rgba(201, 185, 163, 0.8)",
-                    "& .MuiSvgIcon-root": { fontSize: 16 },
-                  }}
+                <FormControlLabel
+                  key={task._id}
+                  control={
+                    <Checkbox
+                      sx={{
+                        color: "rgba(201, 185, 163, 0.8)",
+                        "&.Mui-checked": {
+                          color: brown[300],
+                        },
+                        "& .MuiSvgIcon-root": { fontSize: 18 },
+                      }}
+                      checked={task.checked}
+                      onClick={() => handleClick(task._id)}
+                    />
+                  }
+                  label={
+                    <span
+                      style={{
+                        fontSize: "18px",
+                        fontFamily: "'Sora',sans-serif",
+                        fontWeight: "500",
+                        color: "rgb(135, 125, 110)",
+                      }}
+                    >
+                      {task.task}
+                    </span>
+                  }
                 />
-                {task.task}
               </div>
               <TrashIcon onClick={() => deleteTask(task._id)} />
             </div>
@@ -99,6 +130,17 @@ export const ToDoPage = () => {
           +
         </p>
       </div>
+      {success && (
+        <Stack sx={{ width: "100%" }}>
+          <Alert
+            severity="success"
+            color="success"
+            style={{ position: "fixed", bottom: "0vh" }}
+          >
+            You have successfully deleted the task
+          </Alert>
+        </Stack>
+      )}
       <Modal
         isOpen={modalIsOpen}
         onRequestClose={closeModal}

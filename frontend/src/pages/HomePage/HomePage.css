@@ -73,22 +73,27 @@
   margin-top: 80px;
   justify-content: center;
 }
-#sleepDiv h3 {
+#sleepDiv button {
   position: absolute;
-  bottom: -10%;
+  bottom: 8px;
   right: 5%;
   cursor: pointer;
-  padding: 3px;
-  font-size: 25px;
+  font-family: "Alfa Slab One", cursive;
+  color: #949787;
+  border: none;
+  background-color: transparent;
+  font-size: 24px;
 }
-#waterDiv h3 {
+#waterDiv button {
   position: absolute;
-  bottom: -10%;
+  bottom: 8px;
   right: 5%;
   cursor: pointer;
-
-  padding: 3px;
-  font-size: 25px;
+  font-family: "Alfa Slab One", cursive;
+  color: #949787;
+  border: none;
+  background-color: transparent;
+  font-size: 24px;
 }
 #waterDiv {
   background-color: #d6dcc3;
@@ -104,7 +109,7 @@
 #waterDiv p {
   position: absolute;
   bottom: 44%;
-  left: -12%;
+  left: -14%;
   text-shadow: -3px -3px 0px #949787;
   font-size: 54px;
 }
@@ -138,19 +143,15 @@
   margin-left: 80px;
   font-family: "Sora", sans-serif;
   margin-top: 60px;
+  height: 220px;
+  overflow: scroll;
   color: #3b3c49;
 }
 
-#toDoDiv p {
-  font-weight: 400;
-  margin: 0;
-  font-size: 18px;
-  padding: 14px 0px;
-}
 #toDoDiv h1 {
-  font-size: 20px;
+  font-size: 18px;
   margin-bottom: 0px;
-  padding-bottom: 4px;
+  padding-bottom: 10px;
   padding-left: 10px;
   font-weight: 500;
   border-bottom: 0.1px solid #a3a4c8;
@@ -159,7 +160,10 @@
 .checkbox {
   width: 18%;
   display: flex;
+  font-size: 14px;
+  padding: 10px 0px;
   align-items: center;
+  font-family: "Sora", sans-serif;
   border-bottom: 0.1px solid #a3a4c8;
 }
 .checkbox p {

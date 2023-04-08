@@ -4,6 +4,7 @@ import uuidRandom from "uuid-random";
 
 interface Task {
   task: string;
+  checked: boolean;
   _id: string;
 }
 type CreateToDoModalProps = {
@@ -14,26 +15,21 @@ type CreateToDoModalProps = {
 const initialValues = {
   task: "",
   id: "",
+  checked: false,
 };
 
 export const CreateToDoModal = (props: CreateToDoModalProps) => {
   const [formValues, setFormValues] = useState<any>(initialValues);
   const createTask = async (formValues: any) => {
-    await axios.post(
-      `http://localhost:9000/tasks`,
-      // ...props.tasks,
-      formValues,
-      {
-        headers: {
-          "Content-Type": "application/json",
-        },
-      }
-    );
+    await axios.post(`http://localhost:9000/tasks`, formValues, {
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
   };
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
     setFormValues({ ...formValues, [name]: value, id: uuidRandom() });
-    //sets form values
   };
 
   const handleAddButton = async (
