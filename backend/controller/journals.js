@@ -27,3 +27,22 @@ exports.getJournal = async (request, response, next) => {
     response.status(500).json({ error: err });
   }
 };
+exports.updateJournal = async (request, response, next) => {
+  const { journalId } = request.params;
+  try {
+    await Journal.findOneAndUpdate({ _id: journalId }, request.body, {
+      new: true,
+    })
+      .then((res) => {
+        response.status(202).json({
+          Journal: res,
+          message: "You've succesfully updated the post",
+        });
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  } catch (err) {
+    response.status(500).json({ error: err });
+  }
+};

@@ -7,6 +7,7 @@ const {
   createJournal,
   getJournals,
   getJournal,
+  updateJournal,
 } = require("../controller/journals");
 const { createWater, getWaterValues } = require("../controller/water");
 const { createSleep, getSleepValues } = require("../controller/sleep");
@@ -23,6 +24,7 @@ router.delete("/tasks/:taskId", deleteTask);
 router.post("/journal", createJournal);
 router.get("/journals", getJournals);
 router.get("/journals/:journalId", getJournal);
+router.put("/journals/:journalId", updateJournal);
 
 router.post("/water", createWater);
 router.get("/water", getWaterValues);

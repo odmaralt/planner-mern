@@ -29,6 +29,7 @@ export const JournalPage = () => {
   const [formValues, setFormValues] = useState<any>(initialValues);
   const [message, setMessage] = useState("");
   const [data, setData] = useState<string>();
+  const [idData, setIdData] = useState<string>();
   const [success, setSuccess] = useState<boolean>(false);
 
   let currentPath = window.location.pathname;
@@ -50,12 +51,39 @@ export const JournalPage = () => {
       customCreatedAt: date.toISOString(),
     }));
   };
+  const getJournal = async () => {
+    await axios
+      .get(`http://localhost:9000/journals?sort=-createdAt&limit=1`)
+      .then((response) => {
+        setData(response.data[response.data.length - 1].journal);
+        setIdData(response.data[response.data.length - 1]._id);
+      })
+      .catch((err) => console.log(err));
+  };
   const createJournal = async (formValues: any) => {
     await axios.post(`http://localhost:9000/journal`, formValues, {
       headers: {
         "Content-Type": "application/json",
       },
     });
+  };
+  const updateJournal = async (
+    message: string | undefined,
+    _id: string | undefined
+  ) => {
+    try {
+      await axios.put(`http://localhost:9000/journals/${_id}`, message, {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Im9kZHk5NzZAZ21haWwuY29tIiwidXNlcklkIjoiNjQyNGM4ZmU1ZGE0YTU2YjNmZmFkYjlkIiwiaWF0IjoxNjgwMjMyNTg3LCJleHAiOjE2ODAzMTg5ODd9.NknlP8Swrw7dqmh5ABwdNs-WLyGK2XAUjFk7FkCqkJc`,
+        },
+      });
+      setTimeout(() => {
+        window.location.reload();
+      }, 1500);
+    } catch (err) {
+      console.log(err);
+    }
   };
   const handleSaveButton = async (
     e: React.MouseEvent<HTMLButtonElement, MouseEvent>
@@ -64,27 +92,23 @@ export const JournalPage = () => {
     setFormValues({
       ...formValues,
     });
-    await createJournal({ ...formValues })
-      .then(async (response) => {
-        setSuccess(true);
-        setTimeout(() => {
-          setSuccess(false);
-          window.location.reload();
-        }, 1500);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+    if (!data) {
+      await createJournal({ ...formValues })
+        .then(async (response) => {
+          console.log("no data");
+          setSuccess(true);
+          setTimeout(() => {
+            setSuccess(false);
+            window.location.reload();
+          }, 1500);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    }
+    await updateJournal(message, idData);
   };
 
-  const getJournal = async () => {
-    await axios
-      .get(`http://localhost:9000/journals?sort=-createdAt&limit=1`)
-      .then((response) => {
-        setData(response.data[response.data.length - 1].journal);
-      })
-      .catch((err) => console.log(err));
-  };
   useEffect(() => {
     getJournal();
   }, []);
