@@ -2,10 +2,12 @@ import "./HomePage.css";
 import { grey } from "@mui/material/colors";
 
 import Plant from "../../components/Plant";
-import { Checkbox, FormControlLabel } from "@mui/material";
+import { Alert, Checkbox, FormControlLabel } from "@mui/material";
 import { Header } from "../../components/Header";
 import React, { useEffect, useState } from "react";
 import axios from "axios";
+import { Stack } from "@mui/system";
+import { useNavigate } from "react-router-dom";
 interface Task {
   task: string;
   _id: string;
@@ -21,14 +23,6 @@ interface Sleep {
   minutesSlept: string;
   _id: string;
 }
-const waterValues = {
-  cupsDrank: "0",
-  cupsTotal: "8",
-};
-const sleepValues = {
-  hoursSlept: "0",
-  minutesSlept: "0",
-};
 const fetchTasks = async () => {
   return await axios.get(`http://localhost:9000/tasks`, {
     headers: {
@@ -37,13 +31,17 @@ const fetchTasks = async () => {
   });
 };
 export const HomePage = () => {
-  const [water, setWater] = useState<any>(waterValues);
-  const [sleep, setSleep] = useState<any>(sleepValues);
+  const [water, setWater] = useState<any>("");
+  const [sleep, setSleep] = useState<any>("");
   const [data, setData] = useState<Task[]>([]);
   const [tasks, setTasks] = React.useState<Task[]>([]);
   const [sleepData, setSleepData] = React.useState<Sleep[]>([]);
   const [waterData, setWaterData] = React.useState<Water[]>([]);
   const [dateState, setDateState] = useState(new Date());
+  const [waterSuccess, setWaterSuccess] = useState<boolean>(false);
+  const [sleepSuccess, setSleepSuccess] = useState<boolean>(false);
+  const navigate = useNavigate();
+
   useEffect(() => {
     setInterval(() => setDateState(new Date()), 30000);
   }, []);
@@ -89,44 +87,7 @@ export const HomePage = () => {
       },
     });
   };
-  const handleSaveWaterButton = async (
-    e: React.MouseEvent<HTMLButtonElement, MouseEvent>
-  ) => {
-    e.preventDefault();
-    if (water) {
-      const values = {
-        ...water,
-      };
-      await createWaterValues(values)
-        .then(async (response) => {
-          setTimeout(() => {
-            window.location.reload();
-          }, 0);
-        })
-        .catch((err) => {
-          console.log(err);
-        });
-    }
-  };
-  const handleSaveSleepButton = async (
-    e: React.MouseEvent<HTMLButtonElement, MouseEvent>
-  ) => {
-    e.preventDefault();
-    if (sleep) {
-      const values = {
-        ...sleep,
-      };
-      await createSleepValues(values)
-        .then(async (response) => {
-          setTimeout(() => {
-            window.location.reload();
-          }, 0);
-        })
-        .catch((err) => {
-          console.log(err);
-        });
-    }
-  };
+
   const getSleep = async () => {
     await axios
       .get(`http://localhost:9000/sleep`)
@@ -149,6 +110,110 @@ export const HomePage = () => {
   useEffect(() => {
     getWater();
   }, []);
+  const updateSleep = async (
+    hoursSlept: string | undefined,
+    minutesSlept: string | undefined,
+    _id: string
+  ) => {
+    await axios
+      .put(
+        `http://localhost:9000/sleep/${_id}`,
+        { ...sleep, ...sleepData },
+        {
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Im9kZHk5NzZAZ21haWwuY29tIiwidXNlcklkIjoiNjQyNGM4ZmU1ZGE0YTU2YjNmZmFkYjlkIiwiaWF0IjoxNjgwMjMyNTg3LCJleHAiOjE2ODAzMTg5ODd9.NknlP8Swrw7dqmh5ABwdNs-WLyGK2XAUjFk7FkCqkJc`,
+          },
+        }
+      )
+      .then((response) => {
+        setSleepSuccess(true);
+        setTimeout(() => {
+          setSleepSuccess(false);
+          window.location.reload();
+        }, 1000);
+      })
+      .catch((err) => console.log(err));
+  };
+  const updateWater = async (
+    cupsDrank: string | undefined,
+    cupsTotal: string | undefined,
+    _id: string
+  ) => {
+    await axios
+      .put(
+        `http://localhost:9000/water/${_id}`,
+        { ...water, ...waterData },
+        {
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Im9kZHk5NzZAZ21haWwuY29tIiwidXNlcklkIjoiNjQyNGM4ZmU1ZGE0YTU2YjNmZmFkYjlkIiwiaWF0IjoxNjgwMjMyNTg3LCJleHAiOjE2ODAzMTg5ODd9.NknlP8Swrw7dqmh5ABwdNs-WLyGK2XAUjFk7FkCqkJc`,
+          },
+        }
+      )
+      .then((response) => {
+        setWaterSuccess(true);
+
+        setTimeout(() => {
+          setWaterSuccess(false);
+
+          window.location.reload();
+        }, 1000);
+      })
+      .catch((err) => console.log(err));
+  };
+  const handleSaveWaterButton = async (
+    e: React.MouseEvent<HTMLButtonElement, MouseEvent>
+  ) => {
+    e.preventDefault();
+    if (!water) {
+      const values = {
+        ...water,
+      };
+      await createWaterValues(values)
+        .then(async (response) => {
+          setTimeout(() => {
+            window.location.reload();
+          }, 0);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    }
+    await updateWater(
+      waterData[waterData.length - 1].cupsDrank,
+      waterData[waterData.length - 1].cupsTotal,
+      waterData[waterData.length - 1]._id
+    );
+  };
+  const handleSaveSleepButton = async (
+    e: React.MouseEvent<HTMLButtonElement, MouseEvent>
+  ) => {
+    e.preventDefault();
+    if (!sleep) {
+      const values = {
+        ...sleep,
+      };
+
+      await createSleepValues(values)
+        .then(async (response) => {
+          setTimeout(() => {
+            window.location.reload();
+          }, 0);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    }
+    await updateSleep(
+      sleepData[sleepData.length - 1].hoursSlept,
+      sleepData[sleepData.length - 1].minutesSlept,
+      sleepData[sleepData.length - 1]._id
+    );
+  };
+  const handleToDoClick = () => {
+    navigate("/to-do-list");
+  };
   return (
     <div id="homePageDiv">
       <Header currentPath={currentPath} />
@@ -215,7 +280,7 @@ export const HomePage = () => {
       </div>
       <div id="coolBox2">.</div>
       <div id="toDoDiv">
-        <h1>To-do List</h1>
+        <h1 onClick={handleToDoClick}>To-do List</h1>
         {data?.map((task: Task) => {
           return (
             <div>
@@ -254,6 +319,28 @@ export const HomePage = () => {
         })}
         <Plant />
       </div>
+      {waterSuccess && (
+        <Stack sx={{ width: "100%" }}>
+          <Alert
+            severity="success"
+            color="success"
+            style={{ position: "fixed", bottom: "0vh" }}
+          >
+            You have successfully updated cups of water you've drank
+          </Alert>
+        </Stack>
+      )}{" "}
+      {sleepSuccess && (
+        <Stack sx={{ width: "100%" }}>
+          <Alert
+            severity="success"
+            color="success"
+            style={{ position: "fixed", bottom: "0vh" }}
+          >
+            You have successfully updated hours/minutes of sleep you've gotten
+          </Alert>
+        </Stack>
+      )}
     </div>
   );
 };

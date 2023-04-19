@@ -36,12 +36,23 @@ exports.updateJournal = async (request, response, next) => {
       .then((res) => {
         response.status(202).json({
           Journal: res,
-          message: "You've succesfully updated the post",
+          message: "You've succesfully updated the journal",
         });
       })
       .catch((err) => {
         console.log(err);
       });
+  } catch (err) {
+    response.status(500).json({ error: err });
+  }
+};
+exports.deleteJournal = async (request, response, next) => {
+  const { journalId } = request.params;
+  try {
+    await Journal.findOneAndRemove({ _id: journalId });
+    response
+      .status(202)
+      .json({ message: "You've succesfully deleted the journal" });
   } catch (err) {
     response.status(500).json({ error: err });
   }

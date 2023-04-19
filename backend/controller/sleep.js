@@ -19,3 +19,22 @@ exports.getSleepValues = async (request, response, next) => {
     next(error);
   }
 };
+exports.updateSleep = async (request, response, next) => {
+  const { sleepId } = request.params;
+  try {
+    await Sleep.findOneAndUpdate({ _id: sleepId }, request.body, {
+      new: true,
+    })
+      .then((res) => {
+        response.status(202).json({
+          sleep: res,
+          message: "You've succesfully updated sleep",
+        });
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  } catch (err) {
+    response.status(500).json({ error: err });
+  }
+};

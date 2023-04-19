@@ -18,4 +18,22 @@ exports.getWaterValues = async (request, response, next) => {
   } catch (error) {
     next(error);
   }
+};exports.updateWater= async (request, response, next) => {
+  const { waterId } = request.params;
+  try {
+    await Water.findOneAndUpdate({ _id: waterId }, request.body, {
+      new: true,
+    })
+      .then((res) => {
+        response.status(202).json({
+          water: res,
+          message: "You've succesfully updated water",
+        });
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  } catch (err) {
+    response.status(500).json({ error: err });
+  }
 };

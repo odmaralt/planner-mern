@@ -8,6 +8,7 @@ import { CreateToDoModal } from "../../components/CreateToDoModal";
 import { Header } from "../../components/Header";
 import TrashIcon from "../../components/TrashIcon";
 import "./ToDoPage.css";
+import { CheckTaskModal } from "../../components/CheckTaskModal";
 const customStyles = {
   content: {
     top: "50%",
@@ -37,19 +38,22 @@ export const ToDoPage = () => {
   const [data, setData] = useState<Task[]>([]);
   const [success, setSuccess] = useState<boolean>(false);
   const [tasks, setTasks] = React.useState<Task[]>([]);
-  const handleClick = (id: string) => {
-    const newTasks = tasks.map((task) => {
-      if (task._id === id) {
-        return { ...task, completed: !task.checked };
-      } else {
-        return task;
-      }
-    });
-    setTasks(newTasks);
-  };
+  // const handleClick = (id: string) => {
+  //   const newTasks = tasks.map((task) => {
+  //     if (task._id === id) {
+  //       return { ...task, completed: !task.checked };
+  //     } else {
+  //       return task;
+  //     }
+  //   });
+
+  //   setTasks(newTasks);
+  // };
+
   const openModal = () => {
     setIsOpen(true);
   };
+
   const deleteTask = async (_id: string) => {
     await axios
       .delete(`http://localhost:9000/tasks/${_id}`, {
@@ -65,7 +69,7 @@ export const ToDoPage = () => {
           setSuccess(false);
 
           window.location.reload();
-        }, 1000);
+        }, 1800);
       })
       .catch((err) => console.log(err));
   };
@@ -81,7 +85,6 @@ export const ToDoPage = () => {
         console.log(err);
       });
   }, []);
-
   return (
     <div id="toDoPageDiv">
       <Header currentPath={currentPath} />
@@ -103,7 +106,7 @@ export const ToDoPage = () => {
                         "& .MuiSvgIcon-root": { fontSize: 18 },
                       }}
                       checked={task.checked}
-                      onClick={() => handleClick(task._id)}
+                      onClick={() => deleteTask(task._id)}
                     />
                   }
                   label={
@@ -137,7 +140,7 @@ export const ToDoPage = () => {
             color="success"
             style={{ position: "fixed", bottom: "0vh" }}
           >
-            You have successfully deleted the task
+            Your task has been deleted!
           </Alert>
         </Stack>
       )}
@@ -152,7 +155,18 @@ export const ToDoPage = () => {
           tasks={tasks}
         />
       </Modal>
-      ;
+      {/* <Modal
+        isOpen={modalOpen}
+        onRequestClose={closeModal}
+        style={customStyles}
+      >
+        <CheckTaskModal
+          deleteTask={deleteTask}
+          closeCheckModal={closeCheckModal}
+          id={id}
+        />
+      </Modal>
+      ; */}
     </div>
   );
 };

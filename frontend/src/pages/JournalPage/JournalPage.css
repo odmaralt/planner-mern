@@ -58,9 +58,8 @@
   background-color: rgb(145, 134, 120);
   outline: none;
   border: none;
-  right: 35vw;
-  top: 22vh;
-  margin-top: 10px;
+  right: 35.4vw;
+  top: 23vh;
   color: rgb(207, 193, 171);
   font-family: "Sora", sans-serif;
   font-weight: 500;
@@ -112,7 +111,6 @@
     width: 76%;
     margin-top: 8.4vh;
     height: 50vh;
-    padding-top: 80px;
   }
   #journalOutline {
     height: 63vh;
@@ -125,16 +123,16 @@
   }
   #promptButton {
     right: 10vw;
-    top: 22vh;
+    top: 21.8vh;
   }
 }
 @media screen and (max-width: 400px) {
   #journalBox {
     height: 40vh;
-    padding-top: 80px;
+    padding-top: 90px;
   }
   #promptButton {
-    right: 10vw;
-    top: 26vh;
+    right: 8vw;
+    top: 25.6vh;
   }
 }

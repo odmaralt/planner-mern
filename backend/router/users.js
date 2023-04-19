@@ -1,5 +1,5 @@
 const express = require("express");
-const { authLoginWithJwt } = require("../authentication/auth");
+const { authLoginWithJwt, authRegister } = require("../authentication/auth");
 const { getTasks, createTask, deleteTask } = require("../controller/tasks");
 const { createUser, getUsers } = require("../controller/users");
 const { checkToken } = require("../authentication/jwt");
@@ -8,28 +8,40 @@ const {
   getJournals,
   getJournal,
   updateJournal,
+  deleteJournal,
 } = require("../controller/journals");
-const { createWater, getWaterValues } = require("../controller/water");
-const { createSleep, getSleepValues } = require("../controller/sleep");
+const {
+  createWater,
+  getWaterValues,
+  updateWater,
+} = require("../controller/water");
+const {
+  createSleep,
+  getSleepValues,
+  updateSleep,
+} = require("../controller/sleep");
 
 const router = express.Router();
 router.get("/", getUsers);
-router.post("/signUp", createUser);
+router.post("/signUp", createUser, authRegister);
 router.post("/login", authLoginWithJwt);
 
-router.post("/tasks", createTask);
-router.get("/tasks", getTasks);
-router.delete("/tasks/:taskId", deleteTask);
+router.post("/tasks", createTask, checkToken);
+router.get("/tasks", getTasks, checkToken);
+router.delete("/tasks/:taskId", deleteTask, checkToken);
 
-router.post("/journal", createJournal);
-router.get("/journals", getJournals);
-router.get("/journals/:journalId", getJournal);
-router.put("/journals/:journalId", updateJournal);
+router.post("/journal", createJournal, checkToken);
+router.get("/journals", getJournals, checkToken);
+router.get("/journals/:journalId", getJournal, checkToken);
+router.put("/journals/:journalId", updateJournal, checkToken);
+router.delete("/journals/:journalId", deleteJournal, checkToken);
 
-router.post("/water", createWater);
-router.get("/water", getWaterValues);
+router.post("/water", createWater, checkToken);
+router.get("/water", getWaterValues, checkToken);
+router.put("/water/:waterId", updateWater, checkToken);
 
-router.post("/sleep", createSleep);
-router.get("/sleep", getSleepValues);
+router.post("/sleep", createSleep, checkToken);
+router.get("/sleep", getSleepValues, checkToken);
+router.put("/sleep/:sleepId", updateSleep, checkToken);
 
 module.exports = router;

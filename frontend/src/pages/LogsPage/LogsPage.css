@@ -5,29 +5,35 @@
   font-family: "Sora", sans-serif;
 }
 #logsTitleDiv {
-  margin-left: auto;
-  margin-right: auto;
+  display: block;
   margin-top: 10vh;
+  margin-left: 15%;
+  margin-right: 15%;
+}
+#logsTitleDiv div {
+  height: 50vh;
+  overflow: scroll;
 }
 td {
-  width: 14vw;
-  height: 50px;
+  width: 12vw;
+  height: 30px;
   font-size: 16px;
-  border-bottom: 0.5px solid #fff7ea93;
+  font-weight: 500;
+  vertical-align: middle;
 }
 .journal {
-  width: 30vw;
-}
-#logsDiv {
-  overflow: scroll;
-  height: 45vh;
+  width: 32vw;
 }
 @media screen and (max-width: 600px) {
   td {
-    width: 16vw;
+    width: 20vw;
     font-size: 13px;
   }
   .journal {
-    width: 40vw;
+    width: 60vw;
+  }
+  #logsTitleDiv {
+    margin-left: 5%;
+    margin-right: 5%;
   }
 }

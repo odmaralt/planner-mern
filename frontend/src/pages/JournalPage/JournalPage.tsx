@@ -28,8 +28,8 @@ export const JournalPage = () => {
   };
   const [formValues, setFormValues] = useState<any>(initialValues);
   const [message, setMessage] = useState("");
-  const [data, setData] = useState<string>();
-  const [idData, setIdData] = useState<string>();
+  const [data, setData] = useState<string>("");
+  const [idData, setIdData] = useState<string>("");
   const [success, setSuccess] = useState<boolean>(false);
 
   let currentPath = window.location.pathname;
@@ -67,23 +67,28 @@ export const JournalPage = () => {
       },
     });
   };
-  const updateJournal = async (
-    message: string | undefined,
-    _id: string | undefined
-  ) => {
-    try {
-      await axios.put(`http://localhost:9000/journals/${_id}`, message, {
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Im9kZHk5NzZAZ21haWwuY29tIiwidXNlcklkIjoiNjQyNGM4ZmU1ZGE0YTU2YjNmZmFkYjlkIiwiaWF0IjoxNjgwMjMyNTg3LCJleHAiOjE2ODAzMTg5ODd9.NknlP8Swrw7dqmh5ABwdNs-WLyGK2XAUjFk7FkCqkJc`,
-        },
-      });
-      setTimeout(() => {
-        window.location.reload();
-      }, 1500);
-    } catch (err) {
-      console.log(err);
-    }
+  const updateJournal = async (message: string | undefined, _id: string) => {
+    await axios
+      .put(
+        `http://localhost:9000/journals/${_id}`,
+        { journal: message },
+        {
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Im9kZHk5NzZAZ21haWwuY29tIiwidXNlcklkIjoiNjQyNGM4ZmU1ZGE0YTU2YjNmZmFkYjlkIiwiaWF0IjoxNjgwMjMyNTg3LCJleHAiOjE2ODAzMTg5ODd9.NknlP8Swrw7dqmh5ABwdNs-WLyGK2XAUjFk7FkCqkJc`,
+          },
+        }
+      )
+      .then((response) => {
+        setSuccess(true);
+
+        setTimeout(() => {
+          setSuccess(false);
+
+          window.location.reload();
+        }, 1000);
+      })
+      .catch((err) => console.log(err));
   };
   const handleSaveButton = async (
     e: React.MouseEvent<HTMLButtonElement, MouseEvent>
