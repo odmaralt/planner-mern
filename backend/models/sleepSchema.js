@@ -13,6 +13,10 @@ const sleepSchema = new Schema({
     minLength: [1, "Input must be at least 1 characters"],
     maxLength: [2, "Input must no more than 2 characters"],
   },
+  ownerId: {
+    type: String,
+    required: true,
+  },
 });
 
 const sleepModel = model("Sleep", sleepSchema);

@@ -4,7 +4,7 @@ const { response } = require("express");
 //generate the token
 module.exports.tokenGenerate = (email, userId) => {
   return jwt.sign({ email: email, userId: userId }, "myTempSecret", {
-    expiresIn: "1d",
+    expiresIn: "3d",
   });
 };
 //verify the token

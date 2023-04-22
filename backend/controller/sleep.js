@@ -3,12 +3,23 @@ exports.createSleep = async (request, response, next) => {
   const body = request.body;
   try {
     const newSleep = await Sleep.create({
+      ...body,
       hoursSlept: body.hoursSlept,
       minutesSlept: body.minutesSlept,
     });
     return response.status(201).json(newSleep);
   } catch (err) {
     return response.status(500).json({ message: err });
+  }
+};
+exports.getUserSleeps = async (req, res, next) => {
+  try {
+    const { userId } = req.params;
+    const userSleeps = await Sleep.find({ ownerId: userId }).exec();
+    res.status(200).json(userSleeps);
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ message: "Can't retrieve the user sleeps" });
   }
 };
 exports.getSleepValues = async (request, response, next) => {

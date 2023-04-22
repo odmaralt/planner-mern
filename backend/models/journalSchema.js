@@ -1,4 +1,4 @@
-const { model, Schema } = require("mongoose");
+const { model, Schema, default: mongoose } = require("mongoose");
 
 const journalSchema = new Schema(
   {
@@ -7,6 +7,7 @@ const journalSchema = new Schema(
       required: [true, "Journal  is required"],
       minLength: [1, "Journal must be at least 1 character"],
     },
+    ownerId: { type: String, required: true },
   },
   { timestamps: true }
 );

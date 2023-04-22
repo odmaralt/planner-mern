@@ -12,7 +12,10 @@ interface Water {
   cupsTotal: string;
   _id: string;
 }
-export const LogsPage = () => {
+interface ILogsPage {
+  user: boolean | undefined;
+}
+export const LogsPage: React.FC<ILogsPage> = ({ user }) => {
   const [sleepData, setSleepData] = React.useState<Sleep[]>([]);
   const [waterData, setWaterData] = React.useState<Water[]>([]);
   const [data, setData] = useState<string>("");
@@ -85,9 +88,7 @@ export const LogsPage = () => {
             )}
             {!waterData && <td>0 out of 0</td>}
             {data && (
-              <div
-                style={{ height: "50px", overflow: "scroll", }}
-              >
+              <div style={{ height: "50px", overflow: "scroll" }}>
                 <td className="journal">{data}</td>
               </div>
             )}

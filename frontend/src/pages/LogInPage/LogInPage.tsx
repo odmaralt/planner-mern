@@ -1,4 +1,5 @@
 import axios from "axios";
+import Cookies from "js-cookie";
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import * as yup from "yup";
@@ -17,7 +18,14 @@ export const LogInPage = () => {
   const [formErrors, setFormErrors] = useState(initialValues);
   const [formValues, setFormValues] = useState(initialValues);
   const [errorMessage, setErrorMessage] = useState("");
-
+  const setCookie = (name: string, value: string) => {
+    const current = new Date();
+    const expirationDate = new Date(current.getTime() + 86400000);
+    return Cookies.set(name, `${value}`, {
+      path: "/",
+      expires: expirationDate,
+    });
+  };
   const navigate = useNavigate();
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
@@ -54,7 +62,12 @@ export const LogInPage = () => {
           }
         )
         .then((response) => {
+          const {
+            data: { token },
+          } = response.data;
           console.log(response.data.data.user);
+          setCookie("userToken", token);
+          setCookie("userId", response.data.data.user._id);
           navigate("/home");
         })
         .catch((err) => {

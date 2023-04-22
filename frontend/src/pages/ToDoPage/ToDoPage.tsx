@@ -9,6 +9,7 @@ import { Header } from "../../components/Header";
 import TrashIcon from "../../components/TrashIcon";
 import "./ToDoPage.css";
 import { CheckTaskModal } from "../../components/CheckTaskModal";
+import { useUserProvider } from "../../provider/UserProvider";
 const customStyles = {
   content: {
     top: "50%",
@@ -25,35 +26,27 @@ interface Task {
   _id: string;
   checked: boolean;
 }
-const fetchTasks = async () => {
-  return await axios.get(`http://localhost:9000/tasks`, {
-    headers: {
-      "Content-Type": "application/json",
-    },
-  });
-};
-export const ToDoPage = () => {
+interface IToDoPage {
+  user: boolean | undefined;
+}
+
+export const ToDoPage: React.FC<IToDoPage> = ({ user }) => {
   let currentPath = window.location.pathname;
   const [modalIsOpen, setIsOpen] = React.useState<any>(false);
   const [data, setData] = useState<Task[]>([]);
   const [success, setSuccess] = useState<boolean>(false);
   const [tasks, setTasks] = React.useState<Task[]>([]);
-  // const handleClick = (id: string) => {
-  //   const newTasks = tasks.map((task) => {
-  //     if (task._id === id) {
-  //       return { ...task, completed: !task.checked };
-  //     } else {
-  //       return task;
-  //     }
-  //   });
-
-  //   setTasks(newTasks);
-  // };
-
   const openModal = () => {
     setIsOpen(true);
   };
-
+  const { userId } = useUserProvider();
+  const fetchTasks = async () => {
+    return await axios.get(`http://localhost:9000/${userId}/tasks`, {
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+  };
   const deleteTask = async (_id: string) => {
     await axios
       .delete(`http://localhost:9000/tasks/${_id}`, {
@@ -155,18 +148,6 @@ export const ToDoPage = () => {
           tasks={tasks}
         />
       </Modal>
-      {/* <Modal
-        isOpen={modalOpen}
-        onRequestClose={closeModal}
-        style={customStyles}
-      >
-        <CheckTaskModal
-          deleteTask={deleteTask}
-          closeCheckModal={closeCheckModal}
-          id={id}
-        />
-      </Modal>
-      ; */}
     </div>
   );
 };

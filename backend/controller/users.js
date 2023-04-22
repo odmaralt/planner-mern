@@ -10,6 +10,16 @@ exports.getUsers = async (request, response, next) => {
     next(error);
   }
 };
+exports.getUser = async (request, response, next) => {
+  const { userId } = request.params;
+
+  try {
+    const user = await User.findById(userId);
+    response.status(200).json(user);
+  } catch (err) {
+    response.status(500).json({ error: err });
+  }
+};
 
 exports.createUser = async (request, response, next) => {
   const body = request.body;
@@ -27,7 +37,6 @@ exports.createUser = async (request, response, next) => {
     });
     const token = tokenGenerate(body.email, newUser._id);
     return response.status(201).json(newUser);
-
   } catch (err) {
     return response.status(500).json({ message: err });
   }

@@ -5,6 +5,7 @@ import Alert from "@mui/material/Alert";
 import Stack from "@mui/material/Stack";
 import { Header } from "../../components/Header";
 import "./JournalPage.css";
+import { useUserProvider } from "../../provider/UserProvider";
 
 const promptsArr = [
   "I am grateful for...",
@@ -20,11 +21,13 @@ const promptsArr = [
   "Describe one or two significant life events that helped shape you into who you are today. ",
   "Finish this sentence: “My life would be incomplete without …”",
 ];
-export const JournalPage = () => {
+interface IJournalPage {
+  user: boolean | undefined;
+}
+export const JournalPage: React.FC<IJournalPage> = ({ user }) => {
   const initialValues = {
     journal: "",
-    _id: "",
-    date: "",
+    ownerId: "",
   };
   const [formValues, setFormValues] = useState<any>(initialValues);
   const [message, setMessage] = useState("");
@@ -33,10 +36,10 @@ export const JournalPage = () => {
   const [success, setSuccess] = useState<boolean>(false);
 
   let currentPath = window.location.pathname;
-  const date = new Date();
 
   const randomNum = Math.floor(Math.random() * promptsArr.length);
   let random = promptsArr[randomNum];
+  const { userId } = useUserProvider();
   const handleRefresh = () => {
     window.location.reload();
   };
@@ -46,21 +49,20 @@ export const JournalPage = () => {
     setFormValues((formValues: any) => ({
       ...formValues,
       journal: message,
-      _id: uuidRandom(),
-      date: date.toDateString(),
-      customCreatedAt: date.toISOString(),
+      ownerId: userId,
     }));
   };
   const getJournal = async () => {
     await axios
-      .get(`http://localhost:9000/journals?sort=-createdAt&limit=1`)
+      .get(`http://localhost:9000/${userId}/journals`)
       .then((response) => {
-        setData(response.data[response.data.length - 1].journal);
-        setIdData(response.data[response.data.length - 1]._id);
+        setData(response.data[response.data.length - 1]?.journal);
+        setIdData(response.data[response.data.length - 1]?._id);
       })
       .catch((err) => console.log(err));
   };
   const createJournal = async (formValues: any) => {
+    console.log(formValues);
     await axios.post(`http://localhost:9000/journal`, formValues, {
       headers: {
         "Content-Type": "application/json",
@@ -98,18 +100,20 @@ export const JournalPage = () => {
       ...formValues,
     });
     if (!data) {
-      await createJournal({ ...formValues })
-        .then(async (response) => {
-          console.log("no data");
-          setSuccess(true);
-          setTimeout(() => {
-            setSuccess(false);
-            window.location.reload();
-          }, 1500);
-        })
-        .catch((err) => {
-          console.log(err);
-        });
+    await createJournal({
+      ...formValues,
+    })
+      .then(async (response) => {
+        console.log("no data");
+        setSuccess(true);
+        setTimeout(() => {
+          setSuccess(false);
+          window.location.reload();
+        }, 1500);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
     }
     await updateJournal(message, idData);
   };

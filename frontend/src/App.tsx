@@ -7,19 +7,30 @@ import { HomePage } from "./pages/HomePage/HomePage";
 import { JournalPage } from "./pages/JournalPage/JournalPage";
 import { ToDoPage } from "./pages/ToDoPage/ToDoPage";
 import { LogsPage } from "./pages/LogsPage/LogsPage";
+import { useUserProvider } from "./provider/UserProvider";
 
 export function App() {
+  const { user } = useUserProvider();
+
   return (
     <div>
+      {" "}
       <BrowserRouter>
-        <Routes>
-          <Route path="/" element={<LogInPage />} />
-          <Route path="/signUp" element={<SignUpPage />} />
-          <Route path="/home" element={<HomePage />} />
-          <Route path="/journal" element={<JournalPage />} />
-          <Route path="/to-do-list" element={<ToDoPage />} />
-          <Route path="/logs" element={<LogsPage />} />
-        </Routes>{" "}
+        <div>
+          {" "}
+          {user && (
+            <Routes>
+              <Route path="/home" element={<HomePage user={user} />} />
+              <Route path="/journal" element={<JournalPage user={user} />} />
+              <Route path="/to-do-list" element={<ToDoPage user={user} />} />
+              <Route path="/logs" element={<LogsPage user={user} />} />
+            </Routes>
+          )}{" "}
+          <Routes>
+            <Route path="/" element={<LogInPage />} />
+            <Route path="/signUp" element={<SignUpPage />} />
+          </Routes>
+        </div>{" "}
       </BrowserRouter>
     </div>
   );

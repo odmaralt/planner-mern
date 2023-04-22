@@ -1,6 +1,7 @@
 import axios from "axios";
 import React, { useState } from "react";
 import uuidRandom from "uuid-random";
+import { useUserProvider } from "../provider/UserProvider";
 
 interface Task {
   task: string;
@@ -14,12 +15,12 @@ type CreateToDoModalProps = {
 };
 const initialValues = {
   task: "",
-  id: "",
-  checked: false,
+  ownerId: "",
 };
 
 export const CreateToDoModal = (props: CreateToDoModalProps) => {
   const [formValues, setFormValues] = useState<any>(initialValues);
+  const { userId } = useUserProvider();
   const createTask = async (formValues: any) => {
     await axios.post(`http://localhost:9000/tasks`, formValues, {
       headers: {
@@ -29,7 +30,7 @@ export const CreateToDoModal = (props: CreateToDoModalProps) => {
   };
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
-    setFormValues({ ...formValues, [name]: value, id: uuidRandom() });
+    setFormValues({ ...formValues, [name]: value, ownerId: userId });
   };
 
   const handleAddButton = async (

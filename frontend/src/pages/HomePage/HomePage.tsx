@@ -8,6 +8,7 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { Stack } from "@mui/system";
 import { useNavigate } from "react-router-dom";
+import { useUserProvider } from "../../provider/UserProvider";
 interface Task {
   task: string;
   _id: string;
@@ -23,14 +24,11 @@ interface Sleep {
   minutesSlept: string;
   _id: string;
 }
-const fetchTasks = async () => {
-  return await axios.get(`http://localhost:9000/tasks`, {
-    headers: {
-      "Content-Type": "application/json",
-    },
-  });
-};
-export const HomePage = () => {
+interface IHomePage {
+  user: boolean | undefined;
+}
+
+export const HomePage: React.FC<IHomePage> = ({ user }) => {
   const [water, setWater] = useState<any>("");
   const [sleep, setSleep] = useState<any>("");
   const [data, setData] = useState<Task[]>([]);
@@ -38,21 +36,31 @@ export const HomePage = () => {
   const [sleepData, setSleepData] = React.useState<Sleep[]>([]);
   const [waterData, setWaterData] = React.useState<Water[]>([]);
   const [dateState, setDateState] = useState(new Date());
+  const [success, setSuccess] = useState<boolean>(false);
+  const [error, setError] = useState<boolean>(false);
+
   const [waterSuccess, setWaterSuccess] = useState<boolean>(false);
   const [sleepSuccess, setSleepSuccess] = useState<boolean>(false);
   const navigate = useNavigate();
-
+  const { userId } = useUserProvider();
+  const fetchTasks = async () => {
+    return await axios.get(`http://localhost:9000/${userId}/tasks`, {
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+  };
   useEffect(() => {
     setInterval(() => setDateState(new Date()), 30000);
   }, []);
   let currentPath = window.location.pathname;
   const handleSleepChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
-    setSleep({ ...sleep, [name]: value });
+    setSleep({ ...sleep, [name]: value, ownerId: userId });
   };
   const handleWaterChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
-    setWater({ ...water, [name]: value });
+    setWater({ ...water, [name]: value, ownerId: userId });
   };
   useEffect(() => {
     fetchTasks()
@@ -63,16 +71,6 @@ export const HomePage = () => {
         console.log(err);
       });
   }, []);
-  const handleClick = (id: string) => {
-    const newTasks = tasks.map((task) => {
-      if (task._id === id) {
-        return { ...task, completed: !task.checked };
-      } else {
-        return task;
-      }
-    });
-    setTasks(newTasks);
-  };
   const createSleepValues = async (sleep: any) => {
     await axios.post(`http://localhost:9000/sleep`, sleep, {
       headers: {
@@ -87,10 +85,9 @@ export const HomePage = () => {
       },
     });
   };
-
   const getSleep = async () => {
     await axios
-      .get(`http://localhost:9000/sleep`)
+      .get(`http://localhost:9000/${userId}/sleeps`)
       .then((response) => {
         setSleepData(response.data);
       })
@@ -101,7 +98,7 @@ export const HomePage = () => {
   }, []);
   const getWater = async () => {
     await axios
-      .get(`http://localhost:9000/water`)
+      .get(`http://localhost:9000/${userId}/waters`)
       .then((response) => {
         setWaterData(response.data);
       })
@@ -166,10 +163,14 @@ export const HomePage = () => {
     e: React.MouseEvent<HTMLButtonElement, MouseEvent>
   ) => {
     e.preventDefault();
-    if (!water) {
-      const values = {
-        ...water,
-      };
+    const values = {
+      ...water,
+    };
+
+    if (waterData.length <= 0) {
+      if (!values.cupsDrank || !values.cupsTotal) {
+        setError(true);
+      }
       await createWaterValues(values)
         .then(async (response) => {
           setTimeout(() => {
@@ -190,11 +191,16 @@ export const HomePage = () => {
     e: React.MouseEvent<HTMLButtonElement, MouseEvent>
   ) => {
     e.preventDefault();
-    if (!sleep) {
-      const values = {
-        ...sleep,
-      };
-
+    const values = {
+      ...sleep,
+    };
+    if (sleepData.length <= 0) {
+      if (!values.hoursSlept) {
+        setError(true);
+      }
+      if (!values.minutesSlept) {
+        values.minutesSlept = "0";
+      }
       await createSleepValues(values)
         .then(async (response) => {
           setTimeout(() => {
@@ -213,6 +219,25 @@ export const HomePage = () => {
   };
   const handleToDoClick = () => {
     navigate("/to-do-list");
+  };
+  const deleteTask = async (_id: string) => {
+    await axios
+      .delete(`http://localhost:9000/tasks/${_id}`, {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Im9kZHk5NzZAZ21haWwuY29tIiwidXNlcklkIjoiNjQyNGM4ZmU1ZGE0YTU2YjNmZmFkYjlkIiwiaWF0IjoxNjgwMjMyNTg3LCJleHAiOjE2ODAzMTg5ODd9.NknlP8Swrw7dqmh5ABwdNs-WLyGK2XAUjFk7FkCqkJc`,
+        },
+      })
+      .then((response) => {
+        setSuccess(true);
+
+        setTimeout(() => {
+          setSuccess(false);
+
+          window.location.reload();
+        }, 1800);
+      })
+      .catch((err) => console.log(err));
   };
   return (
     <div id="homePageDiv">
@@ -297,7 +322,7 @@ export const HomePage = () => {
                         "& .MuiSvgIcon-root": { fontSize: 18 },
                       }}
                       checked={task.checked}
-                      onClick={() => handleClick(task._id)}
+                      onClick={() => deleteTask(task._id)}
                     />
                   }
                   label={
@@ -338,6 +363,28 @@ export const HomePage = () => {
             style={{ position: "fixed", bottom: "0vh" }}
           >
             You have successfully updated hours/minutes of sleep you've gotten
+          </Alert>
+        </Stack>
+      )}{" "}
+      {success && (
+        <Stack sx={{ width: "100%" }}>
+          <Alert
+            severity="success"
+            color="success"
+            style={{ position: "fixed", bottom: "0vh" }}
+          >
+            Your task has been deleted!
+          </Alert>
+        </Stack>
+      )}{" "}
+      {error && (
+        <Stack sx={{ width: "100%" }}>
+          <Alert
+            severity="error"
+            color="error"
+            style={{ position: "fixed", bottom: "0vh" }}
+          >
+            Your input is incomplete.
           </Alert>
         </Stack>
       )}
