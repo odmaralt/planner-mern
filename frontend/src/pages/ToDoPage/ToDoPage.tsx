@@ -83,6 +83,7 @@ export const ToDoPage: React.FC<IToDoPage> = ({ user }) => {
       <Header currentPath={currentPath} />
       <div id="toDoTitle">TO-DO-LIST</div>
       <div id="toDoBox">
+        {data.length === 0 && <div id="noTaskDiv">You have no tasks.</div>}
         {data?.map((task: Task) => {
           return (
             <div>

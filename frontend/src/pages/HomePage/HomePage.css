@@ -31,14 +31,13 @@
 }
 #dateDiv {
   font-family: "Sora", sans-serif;
-  padding-left: 80px;
-  padding-top: 84px;
+  padding-left: 92px;
+  padding-top: 50px;
   font-weight: 500;
   color: #3b3c49;
 }
 #dateDiv p {
   font-size: 22px;
-
   margin: 8px 0px;
 }
 #dateDiv h1 {
@@ -140,7 +139,7 @@
   z-index: 0;
 }
 #toDoDiv {
-  margin-left: 80px;
+  margin-left: 92px;
   font-family: "Sora", sans-serif;
   margin-top: 60px;
   height: 220px;
@@ -157,6 +156,20 @@
   font-weight: 500;
   border-bottom: 0.1px solid #a3a4c8;
   width: 17.3%;
+}
+#restartDay {
+  font-family: "Alfa Slab One";
+  background-color: #808376;
+  letter-spacing: 0.6px;
+  color: #fdfff8;
+  border: none;
+  margin-left: 92px;
+  border-radius: 5px;
+  cursor: pointer;
+  padding: 12px 15px;
+}
+#restartDay:hover {
+  background-color: #727569;
 }
 .checkbox {
   width: 18%;
@@ -234,6 +247,9 @@
   #taskModalDiv {
     width: 40vw;
   }
+  #dateDiv {
+    padding-left: 50px;
+  }
   #headerRight {
     width: 47vw;
     padding-right: 5%;
@@ -242,7 +258,7 @@
     padding-left: 50px;
   }
   #plant {
-    right: 2%;
+    right: 0.5%;
     bottom: 2%;
   }
   #sleepDiv {
@@ -253,9 +269,15 @@
     right: 22%;
     top: 48%;
   }
+  #restartDay {
+    margin-left: 50px;
+  }
   #coolBox {
     right: 25%;
     top: 17%;
+  }
+  #toDoDiv {
+    margin-left: 50px;
   }
   #coolBox2 {
     right: 25%;
@@ -265,6 +287,12 @@
 @media screen and (max-width: 600px) {
   #sleepDiv h3 {
     font-size: 18px;
+  }
+  #restartDay {
+    margin-left: 20px;
+    padding: 10px 12px;
+    font-size: 14px;
+    margin-top: 14px;
   }
   #waterDiv h3 {
     font-size: 18px;
@@ -307,6 +335,12 @@
   }
   #waterDiv p {
     font-size: 38px;
+  }
+  #waterDiv button {
+    font-size: 20px;
+  }
+  #sleepDiv button {
+    font-size: 20px;
   }
   #coolBox {
     right: 13%;

@@ -1,6 +1,5 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-import uuidRandom from "uuid-random";
 import Alert from "@mui/material/Alert";
 import Stack from "@mui/material/Stack";
 import { Header } from "../../components/Header";
@@ -17,7 +16,7 @@ const promptsArr = [
   "Describe your perfect morning.",
   "What fear can you overcome?",
   "What kind of day are you having, and why?",
-  "What are your strengths in relationships (kindness, empathy, etc.)?",
+  "What are strengths in relationships (kindness, empathy, etc.)?",
   "Describe one or two significant life events that helped shape you into who you are today. ",
   "Finish this sentence: “My life would be incomplete without …”",
 ];
@@ -100,20 +99,20 @@ export const JournalPage: React.FC<IJournalPage> = ({ user }) => {
       ...formValues,
     });
     if (!data) {
-    await createJournal({
-      ...formValues,
-    })
-      .then(async (response) => {
-        console.log("no data");
-        setSuccess(true);
-        setTimeout(() => {
-          setSuccess(false);
-          window.location.reload();
-        }, 1500);
+      await createJournal({
+        ...formValues,
       })
-      .catch((err) => {
-        console.log(err);
-      });
+        .then(async (response) => {
+          console.log("no data");
+          setSuccess(true);
+          setTimeout(() => {
+            setSuccess(false);
+            window.location.reload();
+          }, 1500);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
     }
     await updateJournal(message, idData);
   };

@@ -9,6 +9,14 @@ exports.createJournal = async (request, response, next) => {
     return response.status(500).json({ message: err });
   }
 };
+// exports.renewJournal = async (request, response, next) => {
+//   try {
+//     const newJournal = await Journal.create({ journal: " " });
+//     return response.status(201).json(newJournal);
+//   } catch (err) {
+//     return response.status(500).json({ message: err });
+//   }
+// };
 exports.getJournals = async (request, response, next) => {
   try {
     const journals = await Journal.find().exec();
@@ -37,7 +45,7 @@ exports.getJournal = async (request, response, next) => {
   }
 };
 exports.updateJournal = async (request, response, next) => {
-  const { journalId } = request.params;
+  const { journalId, userId } = request.params;
   try {
     await Journal.findOneAndUpdate({ _id: journalId }, request.body, {
       new: true,

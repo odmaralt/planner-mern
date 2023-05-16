@@ -1,6 +1,5 @@
 import "./HomePage.css";
 import { grey } from "@mui/material/colors";
-
 import Plant from "../../components/Plant";
 import { Alert, Checkbox, FormControlLabel } from "@mui/material";
 import { Header } from "../../components/Header";
@@ -38,7 +37,6 @@ export const HomePage: React.FC<IHomePage> = ({ user }) => {
   const [dateState, setDateState] = useState(new Date());
   const [success, setSuccess] = useState<boolean>(false);
   const [error, setError] = useState<boolean>(false);
-
   const [waterSuccess, setWaterSuccess] = useState<boolean>(false);
   const [sleepSuccess, setSleepSuccess] = useState<boolean>(false);
   const navigate = useNavigate();
@@ -217,6 +215,41 @@ export const HomePage: React.FC<IHomePage> = ({ user }) => {
       sleepData[sleepData.length - 1]._id
     );
   };
+  const createJournal = async () => {
+    await axios.post(
+      `http://localhost:9000/journal`,
+      { journal: "", ownerId: userId },
+      {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }
+    );
+  };
+  const handleRestart = async (
+    e: React.MouseEvent<HTMLButtonElement, MouseEvent>
+  ) => {
+    e.preventDefault();
+    await createSleepValues({
+      hoursSlept: "0",
+      minutesSlept: "0",
+      ownerId: userId,
+    });
+    await createWaterValues({
+      cupsDrank: "0",
+      cupsTotal: "0",
+      ownerId: userId,
+    });
+    createJournal()
+      .then(async (response) => {
+        setTimeout(() => {
+          window.location.reload();
+        }, 0);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
   const handleToDoClick = () => {
     navigate("/to-do-list");
   };
@@ -242,6 +275,9 @@ export const HomePage: React.FC<IHomePage> = ({ user }) => {
   return (
     <div id="homePageDiv">
       <Header currentPath={currentPath} />
+      <button id="restartDay" onClick={async (e) => await handleRestart(e)}>
+        Restart Day
+      </button>
       <div id="dateDiv">
         <p>Today</p>
 
@@ -306,6 +342,19 @@ export const HomePage: React.FC<IHomePage> = ({ user }) => {
       <div id="coolBox2">.</div>
       <div id="toDoDiv">
         <h1 onClick={handleToDoClick}>To-do List</h1>
+        {data.length === 0 && (
+          <div
+            style={{
+              fontWeight: "600",
+              fontSize: "14px",
+              borderBottom: "none",
+              paddingTop: "8px",
+              paddingLeft: "10px",
+            }}
+          >
+            You have no tasks.
+          </div>
+        )}
         {data?.map((task: Task) => {
           return (
             <div>

@@ -4,8 +4,7 @@ const journalSchema = new Schema(
   {
     journal: {
       type: String,
-      required: [true, "Journal  is required"],
-      minLength: [1, "Journal must be at least 1 character"],
+      // required: [true, "Journal  is required"],
     },
     ownerId: { type: String, required: true },
   },

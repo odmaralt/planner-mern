@@ -15,6 +15,7 @@ const {
   updateJournal,
   deleteJournal,
   getUserJournals,
+  renewJournal,
 } = require("../controller/journals");
 const {
   createWater,
@@ -41,6 +42,7 @@ router.get("/:userId/tasks", getUserTasks, checkToken);
 router.delete("/tasks/:taskId", deleteTask, checkToken);
 
 router.post("/journal", createJournal, checkToken);
+// router.post("/newJournal", renewJournal,);
 router.get("/journals/:journalId", getJournal, checkToken);
 router.get("/:userId/journals", getUserJournals, checkToken);
 router.put("/journals/:journalId", updateJournal, checkToken);
